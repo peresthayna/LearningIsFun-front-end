@@ -1,0 +1,19 @@
+<app-btn-back></app-btn-back>
+<app-sound></app-sound>
+<div class="container-fluid text-center pt-3">
+  <div class="container">
+    <h1>{{ literals.inserirNome }}</h1>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" (keyup)="onValidateName()" [(ngModel)]="nome">
+    </div>
+  </div>
+  <h1>{{ literals.escolherAvatar }}</h1>
+  <div class="container avatares">
+    <div *ngFor="let avatar of avatares" style="display: inline-block;">
+      <button class="btn btn-light" (click)="onSelectAvatar(avatar)"><img [src]="avatar" [ngClass]="[avatarEscolhido == avatar ? 'selecionado' : '']"></button>
+    </div>
+  </div>
+  <div class="text-end mt-2" *ngIf="showButton">
+    <button class="btn btn-light next" (click)="onSaveNewUser()"><img src="assets/main/seta.png" class="next"></button>
+  </div>
+</div>

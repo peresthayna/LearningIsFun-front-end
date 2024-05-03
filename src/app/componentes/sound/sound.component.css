@@ -1,0 +1,21 @@
+img, button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  position: absolute;
+}
+
+.home {
+  top: 10px;
+  left: 145px;
+}
+
+.sound {
+  top: 10px;
+  right: 10px;
+}

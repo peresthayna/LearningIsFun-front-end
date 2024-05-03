@@ -1,0 +1,18 @@
+<app-btn-back></app-btn-back>
+<app-sound></app-sound>
+<div class="container-fluid" [ngClass]="[tema.background]">
+  <div class="text-center pt-3">
+    <h1>{{ tema.nome }}</h1>
+  </div>
+  <div *ngFor="let subtema of tema.subtemas">
+    <div class="subtema">
+      <img class="subimgs" [src]="subtema.imagem">
+      <span class="subtitulo">{{ subtema.nome }}</span>
+      <div *ngFor="let jogo of subtema.jogos" class="jogos">
+        <button class="btn btn-light" (click)="navigate(jogo.url)"><img [src]="jogo.imagem"></button>
+      </div>
+    </div>
+    <hr>
+  </div>
+
+</div>

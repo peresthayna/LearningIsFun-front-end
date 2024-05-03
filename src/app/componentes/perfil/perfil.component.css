@@ -1,0 +1,28 @@
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+
+.card-text img {
+  width: 20px;
+  height: 20px;
+}
+
+.card {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  box-shadow: 3px 3px 0 0 #808080;
+  height: 22vh;
+  width: 15vw;
+  background-color: #ffffff77;
+}
+
+.card-title {
+  padding: 0.2em 0 0 0.5em;
+}
+
+.btn {
+  border-radius: 50%;
+}

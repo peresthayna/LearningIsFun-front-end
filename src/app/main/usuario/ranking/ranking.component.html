@@ -1,0 +1,28 @@
+<app-btn-back></app-btn-back>
+<app-sound></app-sound>
+<div class="container-fluid">
+  <div class="text-center pt-3" *ngIf="usuarios.length == 0">
+    <h2>{{ literals.nenhumJogadorDisponivel }}</h2>
+    <button class="btn btn-light" (click)="navigateCadastro()">+</button>
+  </div>
+  <div class="container" *ngIf="usuarios.length > 0">
+    <table class="table table-striped table-hover text-center">
+      <thead>
+        <tr>
+          <th><h2 class="mb-0">{{ literals.rankingNome }}</h2></th>
+          <th style="width: 5px;"></th>
+          <th><h2 class="mb-0">{{ literals.rankingNivel }}</h2></th>
+          <th><h2 class="mb-0">{{ literals.rankingPontos }}</h2></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios; let i = index" class="tbody" (mouseenter)="lerTexto(usuario.nome + '. ' + (i+1) + 'º lugar. Nível ' + usuario.nivel + '. ' + usuario.pontuacao + ' pontos.')" (mouseleave)="pararLeitura()">
+          <td><img class="avatar" [src]="usuario.avatar"><br>{{ usuario.nome }}</td>
+          <td style="width: 5px;" class="trofeu"><img *ngIf="usuario.trofeu != ''" [src]="usuario.trofeu"></td>
+          <td>{{ usuario.nivel }} <img class="star" src="assets/main/xp.png"></td>
+          <td>{{ usuario.pontuacao }} <img class="star" src="assets/main/star.png"></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,47 @@
+.rosa {
+  background-color: #F2A8F7;
+}
+
+.vermelho {
+  background-color: #FE827A;
+}
+
+.verde {
+  background-color: #72E7B2;
+}
+
+.azul {
+  background-color: #8EE1FF;
+}
+
+.container-fluid {
+  height: 100vh;
+}
+
+.subimgs {
+  width: 150px;
+  height: 150px;
+  box-shadow: 2px 2px 2px 2px #c0c0c0;
+}
+
+.subtema, .jogos {
+  display: inline-block;
+}
+
+.subtitulo {
+  font-size: 1.5em;
+  position: fixed;
+  padding-left: 10px;
+}
+
+.jogos button, .jogos button img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0;
+  padding: 0;
+}
+
+.jogos button {
+  margin: 20px 10px 0 20px !important;
+}

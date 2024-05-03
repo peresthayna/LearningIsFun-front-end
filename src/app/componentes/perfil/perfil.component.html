@@ -1,0 +1,13 @@
+<div class="card text-center">
+  <div class="card-body row">
+    <div class="col-6">
+      <img [src]="usuario.avatar" class="avatar">
+      <h3 class="card-title">{{ usuario.nome }}</h3>
+    </div>
+    <div class="card-text col-6">
+      <button class="btn" (click)="logout()"><img src="assets/main/logoff.png" class="logoff"></button>
+      <h4 class="m-0 pt-1">{{ usuario.nivel }} <img src="assets/main/xp.png"></h4>
+      <h4 class="m-0">{{ usuario.pontuacao }} <img src="assets/main/star.png"></h4>
+    </div>
+  </div>
+</div>

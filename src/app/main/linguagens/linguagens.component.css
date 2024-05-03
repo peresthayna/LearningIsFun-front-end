@@ -1,0 +1,16 @@
+.linguagens img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+}
+
+.linguagens button {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  margin: 0 15px;
+}
+

@@ -1,0 +1,55 @@
+.container-fluid {
+  min-height: 100vh;
+  width: 100%;
+  background-image: url('../../../assets/main/background.png');
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.title {
+  font-size: 4em;
+  color: white;
+  font-weight: 400;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  margin-top: 10px;
+}
+
+.subtitle {
+  color: #808080;
+  font-size: 1.5em;
+  padding-left: 70px;
+}
+
+.modulos img {
+  height: 95%;
+  width: 95%;
+}
+
+.modulos button {
+  background-color: #CEA3FF;
+  border-radius: 50%;
+  height: 90px;
+  width: 90px;
+  margin: 10px 80px 0 80px;
+}
+
+.icon img {
+  height: 330px;
+}
+
+.menu img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+}
+
+.menu button {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  padding: 0;
+  margin: 5px 15px;
+}
