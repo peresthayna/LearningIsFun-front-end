@@ -14,7 +14,6 @@ export class HomeComponent implements OnInit {
 
   public literals: any;
   public logado: boolean = false;
-  public usuarioLogado: UsuarioConsulta = new UsuarioConsulta();
 
   constructor(
     private interService: InternacionalizacaoService,
@@ -26,7 +25,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.literals = this.interService.getIdioma();
     this.logado = this.usuarioService.logado;
-    if(this.logado) { this.usuarioLogado = this.usuarioService.obterUsuarioLogado; }
     this.ttsService.stop();
   }
 

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { InternacionalizacaoService } from '../internacionalizacao/internacionalizacao.service';
 import { TextToSpeechService } from '../internacionalizacao/text-to-speech.service';
+import { UsuarioConsulta } from './shared/model/usuario-consulta.dto.model';
 
 @Component({
   selector: 'app-usuario',
@@ -48,7 +49,13 @@ export class UsuarioComponent implements OnInit {
 
   public onSaveNewUser(): void {
     let usuario: UsuarioCadastro = new UsuarioCadastro(this.nome, this.avatarEscolhido);
-    this.usuarioService.cadastrarUsuario(usuario).subscribe(() => this.router.navigate(['']),
+    this.usuarioService.cadastrarUsuario(usuario).subscribe(() => {
+      this.usuarioService.getUsuariosOrdenadosData().subscribe(u => {
+        this.usuarioService.logar(u[0]);
+        UsuarioService.recarregar.emit(true);
+        this.router.navigate([''])
+      });
+    },
     (error: HttpErrorResponse) => {
       this.ttsService.speak('Não deu certo! Vamos tentar de novo?');
       this.nome = '';

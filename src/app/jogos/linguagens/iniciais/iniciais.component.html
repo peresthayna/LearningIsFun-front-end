@@ -1,11 +1,16 @@
-<!--div class="container-fluid">
-  <div class="text-center mt-5" style="color: #FFFFFF;">
+<app-perfil></app-perfil>
+<app-btn-back></app-btn-back>
+<app-reacoes></app-reacoes>
+<app-sound></app-sound>
+<app-reload></app-reload>
+<div class="container-fluid">
+  <div class="text-center" style="color: #FFFFFF;">
     <h2>{{ literals.jogoIniciaisDescricao }}</h2>
     <p>{{ literals.jogoIniciaisDica }}</p>
   </div>
-  <div class="row mt-5" *ngIf="palavras">
+  <div class="row" *ngIf="palavras">
     <div class="col-3 p-2" *ngFor="let palavra of palavras">
-      <div class="card text-center">
+      <div class="card">
         <img [src]="palavra.imagem"  class="card-img-top">
         <div class="card-body">
           <div class="palavra text-center">
@@ -19,4 +24,4 @@
       </div>
     </div>
   </div>
-</!--div-->
+</div>

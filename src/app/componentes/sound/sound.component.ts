@@ -11,17 +11,19 @@ export class SoundComponent implements OnInit {
   public soundOn: boolean;
   @Input() public home: boolean = false;
 
-  constructor(
-    private ttsService: TextToSpeechService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.soundOn = this.ttsService.soundOn;
+    if(localStorage.getItem('sound') == "true") {
+      this.soundOn = true;
+    } else {
+      this.soundOn = false;
+    }
   }
 
   public ativarDesativarSom(): void {
     this.soundOn = !this.soundOn;
-    TextToSpeechService.soundStatusChanged.emit(this.soundOn);
+    localStorage.setItem('sound', this.soundOn.toString());
   }
 
 }

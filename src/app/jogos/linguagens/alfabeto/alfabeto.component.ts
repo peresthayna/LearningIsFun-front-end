@@ -5,6 +5,7 @@ import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { InternacionalizacaoService } from 'src/app/main/internacionalizacao/internacionalizacao.service';
 import { EmbaralharListaService } from '../shared/service/embaralha-lista.service';
 import { JogoService } from '../shared/service/jogo.service';
+import { ReacoesService } from 'src/app/componentes/shared/services/reacoes.service';
 
 @Component({
   selector: 'app-alfabeto',
@@ -76,19 +77,20 @@ export class AlfabetoComponent implements OnInit {
   }
 
   public verificaRespostas(drop: DropItem): void {
-    this.jogoService.verificaRespostas(drop, this.acertou, this.acertouTudo);
-  }
-
-  public adicionarPontos(): void {
-    this.jogoService.adicionarPontos();
-  }
-
-  public adicionarNivel(): void {
-    this.jogoService.adicionarNivel();
-  }
-
-  public tirarPontos(): void {
-   this.jogoService.tirarPontos();
+    if(drop.letra === drop.listaObjetos[0].letra) {
+      this.acertou[drop.posicao] = true;
+      this.jogoService.adicionarPontos();
+      ReacoesService.mudarReacao.emit('acertou');
+    } else {
+      this.jogoService.tirarPontos();
+      this.acertou[drop.posicao] = false;
+      ReacoesService.mudarReacao.emit('triste');
+    }
+    if(this.acertou[0] && this.acertou[1] && this.acertou[2] && this.acertou[3] && this.acertou[4] && this.acertou[5] && this.acertou[6] && this.acertou[7] && this.acertou[8] && this.acertou[9] && this.acertou[3] && this.acertou[10] && this.acertou[11] && this.acertou[12] && this.acertou[13] && this.acertou[14] && this.acertou[15] && this.acertou[16] && this.acertou[17] && this.acertou[18] && this.acertou[19] && this.acertou[20] && this.acertou[21] && this.acertou[22] && this.acertou[23] && this.acertou[24] && this.acertou[25]) {
+      this.acertouTudo = true;
+      ReacoesService.mudarReacao.emit('acertou tudo');
+      this.jogoService.adicionarNivel();
+    }
   }
 
 }

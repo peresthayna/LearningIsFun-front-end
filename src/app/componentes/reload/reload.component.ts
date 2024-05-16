@@ -12,4 +12,8 @@ export class ReloadComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  public reload(): void {
+    window.location.reload();
+  }
+
 }

@@ -15,6 +15,7 @@ export class EscolherUsuarioComponent implements OnInit {
 
   public usuarios: UsuarioConsulta[] = [];
   public literals: any;
+  public carregandoRequisicao: boolean = false;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -30,8 +31,10 @@ export class EscolherUsuarioComponent implements OnInit {
   }
 
   public getUsuarios(): void {
+    this.carregandoRequisicao = true;
     this.usuarioService.getUsuariosOrdenadosData().subscribe(usuarios => {
       this.usuarios = usuarios;
+      this.carregandoRequisicao = false;
       this.ttsService.speak(this.literals.selecionarJogador);
     },
       (error: HttpErrorResponse) => this.ttsService.speak(this.literals.nenhumJogadorDisponivel)
@@ -44,6 +47,14 @@ export class EscolherUsuarioComponent implements OnInit {
 
   public navigateCadastro(): void {
     this.router.navigate(['cadastro']);
+  }
+
+  public deletarUsuario(usuario: UsuarioConsulta): void {
+    this.usuarioService.deletarUsuario(usuario.id).subscribe(
+      () => alert('Excluído com sucesso!'),
+      (error: HttpErrorResponse) => alert('Erro ao excluir!'));
+    window.location.reload();
+    this.getUsuarios();
   }
 
 }

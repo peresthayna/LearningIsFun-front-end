@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { UsuarioConsulta } from '../model/usuario-consulta.dto.model';
 import { UsuarioCadastro } from '../model/usuario-cadastro.dto.model';
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class UsuarioService {
 
+  public static recarregar: EventEmitter<boolean> = new EventEmitter<boolean>();
   private readonly URL: string = 'http://127.0.0.1:8080/usuarios';
 
   constructor(
@@ -38,11 +39,12 @@ export class UsuarioService {
   }
 
   public atualizarUsuario(idUsuario: number, usuario: UsuarioConsulta): Observable<void> {
+    localStorage.setItem('usuario', JSON.stringify(usuario));
     return this.http.put<void>(this.URL+'/atualizar/'+idUsuario, usuario);
   }
 
-  public deletarUsuario(idUsuario: number): void {
-    this.http.delete<void>(this.URL+'/deletar/'+idUsuario);
+  public deletarUsuario(idUsuario: number): Observable<void> {
+    return this.http.delete<void>(this.URL+'/deletar/'+idUsuario);
   }
 
   /*LOGIN*/

@@ -1,11 +1,15 @@
 <app-btn-back></app-btn-back>
 <app-sound></app-sound>
 <div class="container-fluid">
-  <div class="text-center pt-3" *ngIf="usuarios.length == 0">
+  <div class="text-center pt-3" *ngIf="usuarios.length == 0 && !carregandoRequisicao">
     <h2>{{ literals.nenhumJogadorDisponivel }}</h2>
     <button class="btn btn-light" (click)="navigateCadastro()">+</button>
   </div>
-    <div class="text-center pt-3" *ngIf="usuarios.length > 0">
+  <div class="text-center pt-4" *ngIf="carregandoRequisicao">
+    <div class="spinner-border" role="status">
+    </div>
+  </div>
+    <div class="text-center pt-3" *ngIf="usuarios.length > 0 && !carregandoRequisicao">
       <h2>{{ literals.selecionarJogador }}</h2>
     <div class="container">
       <table class="table table-striped table-hover">
@@ -18,7 +22,7 @@
           <tr *ngFor="let usuario of usuarios">
             <td><img class="avatar" [src]="usuario.avatar"><br>{{ usuario.nome }}</td>
             <td class="icons"><button class="btn btn-light" (click)="selecionarUsuario(usuario)"><img src="assets/main/play.png"></button></td>
-            <td class="icons"><button class="btn btn-light"><img src="assets/main/delete.png"></button></td>
+            <td class="icons"><button class="btn btn-light" (click)="deletarUsuario(usuario)"><img src="assets/main/delete.png"></button></td>
           </tr>
         </tbody>
       </table>

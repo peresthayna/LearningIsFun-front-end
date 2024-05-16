@@ -15,6 +15,7 @@ export class RankingComponent implements OnInit {
 
   public usuarios: UsuarioConsulta[] = [];
   public literals: any;
+  public carregandoRequisicao: boolean = false;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -24,13 +25,17 @@ export class RankingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.carregandoRequisicao = true;
     this.getUsuariosOrdenadosPorNivel();
     this.literals = this.interService.getIdioma();
     this.ttsService.stop();
   }
 
   public getUsuariosOrdenadosPorNivel(): void {
-    this.usuarioService.getUsuariosOrdenadosNivel().subscribe(usuarios => this.usuarios = usuarios,
+    this.usuarioService.getUsuariosOrdenadosNivel().subscribe(usuarios => {
+      this.usuarios = usuarios;
+      this.carregandoRequisicao = false;
+    },
       (error: HttpErrorResponse) => this.ttsService.speak(this.literals.nenhumJogadorDisponivel)
     )
   }

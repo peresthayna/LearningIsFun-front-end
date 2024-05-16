@@ -111,11 +111,13 @@ export class TemasComponent implements OnInit {
         this.tema.subtemas[1].jogos[0] = new Jogo();
         this.tema.subtemas[1].jogos[0].id = 11;
         this.tema.subtemas[1].jogos[0].imagem = 'assets/cien/natureza.png';
-        this.tema.subtemas[1].jogos[0].url = '';
+        this.tema.subtemas[1].jogos[0].url = 'natureza';
+        this.tema.subtemas[1].jogos[0].nome = this.literals.jogoSeresVivos;
         this.tema.subtemas[1].jogos[1] = new Jogo();
         this.tema.subtemas[1].jogos[1].id = 12;
-        this.tema.subtemas[1].jogos[1].imagem = 'assets/cien/';
-        this.tema.subtemas[1].jogos[1].url = '';
+        this.tema.subtemas[1].jogos[1].imagem = 'assets/cien/filhotes.jpg';
+        this.tema.subtemas[1].jogos[1].url = 'filhotes';
+        this.tema.subtemas[1].jogos[1].nome = this.literals.jogoFilhotes;
       } else {
         this.tema.nome = this.literals.jogosEducativos;
         this.tema.background = 'azul';
@@ -125,24 +127,28 @@ export class TemasComponent implements OnInit {
         this.tema.subtemas[0].imagem = 'assets/hum/planeta.jpg';
         this.tema.subtemas[0].jogos[0] = new Jogo();
         this.tema.subtemas[0].jogos[0].id = 13;
-        this.tema.subtemas[0].jogos[0].imagem = 'assets/';
-        this.tema.subtemas[0].jogos[0].url = '';
+        this.tema.subtemas[0].jogos[0].imagem = 'assets/hum/clima.png';
+        this.tema.subtemas[0].jogos[0].url = 'clima';
+        this.tema.subtemas[0].jogos[0].nome = this.literals.jogoClima;
         this.tema.subtemas[0].jogos[1] = new Jogo();
         this.tema.subtemas[0].jogos[1].id = 14;
-        this.tema.subtemas[0].jogos[1].imagem = 'assets/';
+        this.tema.subtemas[0].jogos[1].imagem = 'assets/hum/veiculos.jpg';
         this.tema.subtemas[0].jogos[1].url = 'transporte';
+        this.tema.subtemas[0].jogos[1].nome = this.literals.jogoVeiculos;
         this.tema.subtemas[1] = new Subtema();
         this.tema.subtemas[1].id = 8;
         this.tema.subtemas[1].nome = this.literals.historia;
         this.tema.subtemas[1].imagem = 'assets/hum/historias.png';
         this.tema.subtemas[1].jogos[0] = new Jogo();
         this.tema.subtemas[1].jogos[0].id = 15;
-        this.tema.subtemas[1].jogos[0].imagem = 'assets/';
+        this.tema.subtemas[1].jogos[0].imagem = 'assets/hum/folclore.jpg';
         this.tema.subtemas[1].jogos[0].url = 'folclore';
+        this.tema.subtemas[1].jogos[0].nome = this.literals.jogoFolclore;
         this.tema.subtemas[1].jogos[1] = new Jogo();
         this.tema.subtemas[1].jogos[1].id = 16;
-        this.tema.subtemas[1].jogos[1].imagem = 'assets/';
-        this.tema.subtemas[1].jogos[1].url = 'lugares';
+        this.tema.subtemas[1].jogos[1].imagem = 'assets/hum/meios-comunicacao.jpg';
+        this.tema.subtemas[1].jogos[1].url = 'meios-comunicacao';
+        this.tema.subtemas[1].jogos[1].nome = this.literals.jogoMeiosComunicacao;
       }
     });
   }
