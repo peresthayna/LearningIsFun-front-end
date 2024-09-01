@@ -8,17 +8,17 @@
 }
 
 .title {
-  font-size: 4em;
+  font-size: 2.7em;
   color: white;
-  font-weight: 400;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  margin-top: 10px;
+  padding-left: 35px;
+  margin: 0;
 }
 
 .subtitle {
   color: #808080;
   font-size: 1.5em;
   padding-left: 70px;
+  margin: 0;
 }
 
 .modulos img {
@@ -29,8 +29,8 @@
 .modulos button {
   background-color: #CEA3FF;
   border-radius: 50%;
-  height: 90px;
-  width: 90px;
+  height: 85px;
+  width: 85px;
   margin: 0 80px;
 }
 

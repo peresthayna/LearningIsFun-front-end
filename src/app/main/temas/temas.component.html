@@ -7,13 +7,12 @@
   </div>
   <div *ngFor="let subtema of tema.subtemas">
     <div class="subtema">
-      <img class="subimgs" [src]="subtema.imagem">
+      <img class="subimgs" [src]="subtema.imagem" (mouseenter)="lerTexto(subtema.nome)" (mouseleave)="pararLeitura()">
       <span class="subtitulo">{{ subtema.nome }}</span>
       <div *ngFor="let jogo of subtema.jogos" class="jogos">
-        <button class="btn btn-light" (click)="navigate(jogo.url)"><img [src]="jogo.imagem"></button>
+        <button class="btn btn-light" (click)="navigate(jogo.url)" (mouseenter)="lerTexto(jogo.nome)" (mouseleave)="pararLeitura()"><img [src]="jogo.imagem"></button>
       </div>
     </div>
     <hr>
   </div>
-
 </div>

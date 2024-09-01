@@ -2,13 +2,13 @@
   <app-linguagens></app-linguagens>
   <app-sound [home]="true"></app-sound>
   <app-perfil *ngIf="logado"></app-perfil>
-  <div class="row mt-4">
-    <div class="px-4 col-8">
+  <div class="row mt-2">
+    <div class="pb-2 col-8">
       <span class="subtitle">{{ literals.subtitulo }}</span>
       <h1 class="title">LearningIsFun</h1>
     </div>
     <div class="menu col-4 text-end">
-      <button class="btn btn-light" pTooltip="Ranking" tooltipPosition="left" (mouseenter)="lerTexto('ranking')" (mouseleave)="pararLeitura()" (click)="navigate('ranking')"><img src="assets/main/trophy.jpeg"></button>
+      <button class="btn btn-light" pTooltip="Ranking" tooltipPosition="left" (mouseenter)="lerTexto('ranking')" (mouseleave)="pararLeitura()" (click)="navigate('ranking')"><img src="assets/main/trophy.png"></button>
       <button class="btn btn-light" (mouseenter)="lerTexto(literals.tooltipPlay)" (mouseleave)="pararLeitura()" [pTooltip]="literals.tooltipPlay" tooltipPosition="left" (click)="navigate('cadastro')"><img src="assets/main/add.png"></button>
       <button class="btn btn-light" (mouseenter)="lerTexto(literals.tooltipSave)" (mouseleave)="pararLeitura()" [pTooltip]="literals.tooltipSave" tooltipPosition="left" (click)="navigate('login')"><img src="assets/main/kids.png"></button>
     </div>

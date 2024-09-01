@@ -1,11 +1,11 @@
 import { Palavra } from './../shared/model/palavra.model';
 import { Component, OnInit } from '@angular/core';
-import { InternacionalizacaoService } from 'src/app/main/internacionalizacao/internacionalizacao.service';
 import { Resposta } from '../shared/model/resposta.model';
 import { EmbaralharListaService } from '../shared/service/embaralha-lista.service';
-import { UsuarioService } from 'src/app/main/usuario/shared/service/usuario.service';
-import { UsuarioConsulta } from 'src/app/main/usuario/shared/model/usuario-consulta.dto.model';
 import { JogoService } from '../shared/service/jogo.service';
+import { UsuarioConsulta } from '../../../main/usuario/shared/model/usuario-consulta.dto.model';
+import { InternacionalizacaoService } from '../../../main/internacionalizacao/internacionalizacao.service';
+import { ReacoesService } from '../../../componentes/shared/services/reacoes.service';
 
 @Component({
   selector: 'app-cores',
@@ -22,7 +22,6 @@ export class CoresComponent implements OnInit {
   public ativarLeoTriste: boolean = false;
   public ativarLeoOk: boolean = false;
   public literals: any;
-  private usuario: UsuarioConsulta = new UsuarioConsulta();
   public recarregarPerfil: boolean = false;
 
   constructor(
@@ -61,7 +60,7 @@ export class CoresComponent implements OnInit {
     this.palavras[6].respostas[0].resposta = 'M';
     this.palavras[7].respostas[0].resposta = 'P';
     for(let i=0; i<8; i++) {
-      this.palavras[i].imagem = '/assets/linguagens/cores/' + (i+1) + '.png';
+      this.palavras[i].imagem = '/assets/lp/cores/' + (i+1) + '.png';
       this.embaralhaListaService.embaralhaLista(this.alfabeto);
       for (let j = 1; j < 3; j++) {
         this.palavras[i].respostas[j] = new Resposta();
@@ -120,14 +119,17 @@ export class CoresComponent implements OnInit {
 
   public adicionarPontos(): void {
     this.jogoService.adicionarPontos();
+    ReacoesService.mudarReacao.emit('acertou');
   }
 
   public adicionarNivel(): void {
     this.jogoService.adicionarNivel();
+    ReacoesService.mudarReacao.emit('acertou tudo');
   }
 
   public tirarPontos(): void {
     this.jogoService.tirarPontos();
+    ReacoesService.mudarReacao.emit('triste');
   }
 
 }

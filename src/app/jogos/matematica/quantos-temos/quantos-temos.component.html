@@ -1,0 +1,20 @@
+<app-btn-back></app-btn-back>
+<app-perfil></app-perfil>
+<app-reacoes></app-reacoes>
+<app-reload></app-reload>
+<div class="container-fluid">
+  <div class="text-center mt-3" style="color: #FFFFFF;">
+    <h2>{{ literals.jogoQuantidadesDescricao }}</h2>
+    <p>{{ literals.jogoQuantidadesDica }}</p>
+  </div>
+  <div class="container">
+    <div class="row mt-5">
+      <div class="box col-6 mt-3" *ngFor="let parte of partesDoCorpo">
+        <img [src]="parte.imagem">
+        <input type="checkbox" [(ngModel)]="parte.checkbox[0]" class="checkbox" (change)="mudouValor(parte)">
+        <input type="checkbox" [(ngModel)]="parte.checkbox[1]" class="checkbox" (change)="mudouValor(parte)">
+      </div>
+    </div>
+  </div>
+  <app-reload></app-reload>
+</div>

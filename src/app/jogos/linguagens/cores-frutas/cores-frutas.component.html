@@ -1,6 +1,8 @@
-<!--app-botao-voltar></!app-botao-voltar>
-<app-botao-logout></app-botao-logout>
-<div-- class="container-fluid">
+<app-btn-back></app-btn-back>
+<app-perfil></app-perfil>
+<app-reacoes></app-reacoes>
+<app-reload></app-reload>
+<div class="container-fluid">
   <div class="text-center mt-3" style="color: #FFFFFF;">
     <h2>{{ literals.jogoCoresFrutasDescricao }}</h2>
     <p>{{ literals.jogoCoresFrutasDica }}</p>
@@ -25,9 +27,4 @@
       </div>
     </div>
   </div>
-  <div class="footer">
-    <app-reload></app-reload>
-    <app-reacoes-leo [ativarCurioso]="ativarLeoCurioso" [ativarFeliz]="ativarLeoFeliz" [ativarTriste]="ativarLeoTriste" [ativarOk]="acertouTudo"></app-reacoes-leo>
-    <app-perfil [podeRecarregar]="recarregarPerfil"></app-perfil>
-  </div>
-</div-->
+</div>

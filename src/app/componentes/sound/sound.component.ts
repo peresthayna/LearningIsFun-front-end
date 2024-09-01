@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { TextToSpeechService } from 'src/app/main/internacionalizacao/text-to-speech.service';
+import { TextToSpeechService } from '../shared/services/text-to-speech.service';
 
 @Component({
   selector: 'app-sound',
@@ -11,7 +11,7 @@ export class SoundComponent implements OnInit {
   public soundOn: boolean;
   @Input() public home: boolean = false;
 
-  constructor() { }
+  constructor(private ttsService: TextToSpeechService) { }
 
   ngOnInit(): void {
     if(localStorage.getItem('sound') == "true") {
@@ -24,6 +24,7 @@ export class SoundComponent implements OnInit {
   public ativarDesativarSom(): void {
     this.soundOn = !this.soundOn;
     localStorage.setItem('sound', this.soundOn.toString());
+    this.ttsService.pararLeitura();
   }
 
 }

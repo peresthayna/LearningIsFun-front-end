@@ -1,0 +1,18 @@
+.container {
+  background-color: #FFFFFF;
+  width: 700px;
+  height: 400px;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  margin-left: 20px;
+  display: inline;
+}
+
+.checkbox {
+  margin-left: 30px;
+  width: 30px;
+  height: 30px;
+}

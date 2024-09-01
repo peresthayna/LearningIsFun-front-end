@@ -1,0 +1,28 @@
+<app-btn-back></app-btn-back>
+<app-perfil></app-perfil>
+<app-reacoes></app-reacoes>
+<app-reload></app-reload>
+<div class="container-fluid">
+  <div class="text-center mt-3" style="color: #FFFFFF;">
+    <h2>{{ literals.jogoCorpoHumanoDescricao }}</h2>
+    <p>{{ literals.jogoCorpoHumanoDica }}</p>
+  </div>
+  <div class="row body" cdkDropListGroup>
+      <div class="col-6">
+        <div class="drop-place">
+          <div *ngFor="let drop of listaDrop" [ngStyle]="{'margin-top':drop.posicaoY, 'margin-left':drop.posicaoX}">
+            <div class="drop icons" cdkDropList [cdkDropListData]="drop.puzzleList" (cdkDropListDropped)="dropResposta($event, drop)">
+            <img *ngFor="let puzzle of drop.puzzleList" [cdkDragDisabled]="acertouTudo" cdkDrag [src]="puzzle.imagem" class="icons">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="text-center">
+          <div class="puzzle-list" cdkDropList [cdkDropListData]="partesDoCorpo" (cdkDropListDropped)="drop($event)">
+            <img *ngFor="let parte of partesDoCorpo" [cdkDragDisabled]="acertouTudo" cdkDrag [src]="parte.imagem" class="icons">
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

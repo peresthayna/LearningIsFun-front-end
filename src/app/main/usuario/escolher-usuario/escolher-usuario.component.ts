@@ -3,8 +3,8 @@ import { UsuarioConsulta } from '../shared/model/usuario-consulta.dto.model';
 import { UsuarioService } from '../shared/service/usuario.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { InternacionalizacaoService } from '../../internacionalizacao/internacionalizacao.service';
-import { TextToSpeechService } from '../../internacionalizacao/text-to-speech.service';
 import { Router } from '@angular/router';
+import { TextToSpeechService } from '../../../componentes/shared/services/text-to-speech.service';
 
 @Component({
   selector: 'app-escolher-usuario',
@@ -25,9 +25,10 @@ export class EscolherUsuarioComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.ttsService.pararLeitura();
     this.getUsuarios();
     this.literals = this.interService.getIdioma();
-    this.ttsService.stop();
+    this.ttsService.lerTexto(this.literals.selecionarJogador);
   }
 
   public getUsuarios(): void {
@@ -35,9 +36,9 @@ export class EscolherUsuarioComponent implements OnInit {
     this.usuarioService.getUsuariosOrdenadosData().subscribe(usuarios => {
       this.usuarios = usuarios;
       this.carregandoRequisicao = false;
-      this.ttsService.speak(this.literals.selecionarJogador);
+      this.ttsService.lerTexto(this.literals.selecionarJogador);
     },
-      (error: HttpErrorResponse) => this.ttsService.speak(this.literals.nenhumJogadorDisponivel)
+      (error: HttpErrorResponse) => this.ttsService.lerTexto(this.literals.nenhumJogadorDisponivel)
     );
   }
 
@@ -52,9 +53,17 @@ export class EscolherUsuarioComponent implements OnInit {
   public deletarUsuario(usuario: UsuarioConsulta): void {
     this.usuarioService.deletarUsuario(usuario.id).subscribe(
       () => alert('Excluído com sucesso!'),
-      (error: HttpErrorResponse) => alert('Erro ao excluir!'));
+      (error: HttpErrorResponse) => alert(this.literals.erroExcluir));
     window.location.reload();
     this.getUsuarios();
+  }
+
+  public lerTexto(texto: string): void {
+    this.ttsService.lerTexto(texto);
+  }
+
+  public pararLeitura(): void {
+    this.ttsService.pararLeitura();
   }
 
 }

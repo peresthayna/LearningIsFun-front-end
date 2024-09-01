@@ -1,9 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Tema } from './shared/model/tema.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subtema } from './shared/model/subtema.model';
 import { InternacionalizacaoService } from '../internacionalizacao/internacionalizacao.service';
 import { Jogo } from './shared/model/jogo.model';
+import { TextToSpeechService } from '../../componentes/shared/services/text-to-speech.service';
 
 @Component({
   selector: 'app-temas',
@@ -18,10 +19,12 @@ export class TemasComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private interService: InternacionalizacaoService,
-    private router: Router
+    private router: Router,
+    private ttsService: TextToSpeechService
   ) { }
 
   ngOnInit(): void {
+  this.ttsService.pararLeitura();
   this.literals = this.interService.getIdioma();
     this.route.params.subscribe(params => {
       this.tema.id = params['id']
@@ -97,7 +100,7 @@ export class TemasComponent implements OnInit {
         this.tema.subtemas[0].jogos[0] = new Jogo();
         this.tema.subtemas[0].jogos[0].id = 9;
         this.tema.subtemas[0].jogos[0].imagem = 'assets/cien/body.png';
-        this.tema.subtemas[0].jogos[0].url = 'corpo';
+        this.tema.subtemas[0].jogos[0].url = 'anatomia';
         this.tema.subtemas[0].jogos[0].nome = this.literals.jogoCorpoHumano;
         this.tema.subtemas[0].jogos[1] = new Jogo();
         this.tema.subtemas[0].jogos[1].id = 10;
@@ -147,7 +150,7 @@ export class TemasComponent implements OnInit {
         this.tema.subtemas[1].jogos[1] = new Jogo();
         this.tema.subtemas[1].jogos[1].id = 16;
         this.tema.subtemas[1].jogos[1].imagem = 'assets/hum/meios-comunicacao.jpg';
-        this.tema.subtemas[1].jogos[1].url = 'meios-comunicacao';
+        this.tema.subtemas[1].jogos[1].url = 'comunicacao';
         this.tema.subtemas[1].jogos[1].nome = this.literals.jogoMeiosComunicacao;
       }
     });
@@ -157,4 +160,11 @@ export class TemasComponent implements OnInit {
     this.router.navigate([rota]);
   }
 
+  public lerTexto(texto: string): void {
+    this.ttsService.lerTexto(texto);
+  }
+
+  public pararLeitura(): void {
+    this.ttsService.pararLeitura();
+  }
 }

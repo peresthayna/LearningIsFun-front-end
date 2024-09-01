@@ -3,26 +3,27 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { UsuarioService } from './main/usuario/shared/service/usuario.service';
 import { MainModule } from './main/main.module';
-import { FormsModule } from '@angular/forms';
 import { ComponentesModule } from './componentes/componentes.module';
 import { JogosModule } from './jogos/jogos.module';
+import { provideHttpClient } from '@angular/common/http';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
     MainModule,
-    FormsModule,
     ComponentesModule,
     JogosModule
   ],
-  providers: [],
+  providers: [
+    UsuarioService,
+    provideHttpClient()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { DropItem } from '../model/drop-item.model';
-import { UsuarioConsulta } from 'src/app/main/usuario/shared/model/usuario-consulta.dto.model';
-import { UsuarioService } from 'src/app/main/usuario/shared/service/usuario.service';
+import { UsuarioService } from '../../../../main/usuario/shared/service/usuario.service';
+import { UsuarioConsulta } from '../../../../main/usuario/shared/model/usuario-consulta.dto.model';
 
 @Injectable({
   providedIn: 'root'

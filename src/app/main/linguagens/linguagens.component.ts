@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { InternacionalizacaoService } from '../internacionalizacao/internacionalizacao.service';
 import { Router } from '@angular/router';
-import { TextToSpeechService } from '../internacionalizacao/text-to-speech.service';
+import { TextToSpeechService } from '../../componentes/shared/services/text-to-speech.service';
 
 @Component({
   selector: 'app-linguagens',
@@ -15,7 +15,7 @@ export class LinguagensComponent implements OnInit {
   constructor(
     private interService: InternacionalizacaoService,
     private router: Router,
-    private ttsService: TextToSpeechService
+    @Inject(TextToSpeechService) private ttsService: TextToSpeechService
     ) { }
 
   ngOnInit(): void {
@@ -36,11 +36,11 @@ export class LinguagensComponent implements OnInit {
   }
 
   lerTexto(texto: string) {
-    this.ttsService.speak(texto);
+    this.ttsService.lerTexto(texto);
   }
 
   pararLeitura() {
-    this.ttsService.stop();
+    this.ttsService.pararLeitura();
   }
 
 }

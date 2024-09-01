@@ -3,8 +3,8 @@ import { UsuarioConsulta } from '../shared/model/usuario-consulta.dto.model';
 import { UsuarioService } from '../shared/service/usuario.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { InternacionalizacaoService } from '../../internacionalizacao/internacionalizacao.service';
-import { TextToSpeechService } from '../../internacionalizacao/text-to-speech.service';
 import { Router } from '@angular/router';
+import { TextToSpeechService } from '../../../componentes/shared/services/text-to-speech.service';
 
 @Component({
   selector: 'app-ranking',
@@ -28,7 +28,7 @@ export class RankingComponent implements OnInit {
     this.carregandoRequisicao = true;
     this.getUsuariosOrdenadosPorNivel();
     this.literals = this.interService.getIdioma();
-    this.ttsService.stop();
+    this.ttsService.pararLeitura();
   }
 
   public getUsuariosOrdenadosPorNivel(): void {
@@ -36,16 +36,16 @@ export class RankingComponent implements OnInit {
       this.usuarios = usuarios;
       this.carregandoRequisicao = false;
     },
-      (error: HttpErrorResponse) => this.ttsService.speak(this.literals.nenhumJogadorDisponivel)
+      (error: HttpErrorResponse) => this.ttsService.lerTexto(this.literals.nenhumJogadorDisponivel)
     )
   }
 
   lerTexto(texto: string) {
-    this.ttsService.speak(texto);
+    this.ttsService.lerTexto(texto);
   }
 
   pararLeitura() {
-    this.ttsService.stop();
+    this.ttsService.pararLeitura();
   }
 
   public navigateCadastro(): void {

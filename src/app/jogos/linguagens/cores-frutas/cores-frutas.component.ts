@@ -2,10 +2,10 @@ import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, OnInit } from '@angular/core';
 import { Puzzle } from '../shared/model/puzzle.model';
 import { Drop } from '../shared/model/drop.model';
-import { UsuarioConsulta } from 'src/app/main/usuario/shared/model/usuario-consulta.dto.model';
-import { InternacionalizacaoService } from 'src/app/main/internacionalizacao/internacionalizacao.service';
 import { EmbaralharListaService } from '../shared/service/embaralha-lista.service';
-import { UsuarioService } from 'src/app/main/usuario/shared/service/usuario.service';
+import { InternacionalizacaoService } from '../../../main/internacionalizacao/internacionalizacao.service';
+import { JogoService } from '../shared/service/jogo.service';
+import { ReacoesService } from '../../../componentes/shared/services/reacoes.service';
 
 @Component({
   selector: 'app-cores-frutas',
@@ -16,26 +16,21 @@ export class CoresFrutasComponent implements OnInit {
 
   public literals: any;
   public formas: Puzzle[] = [
-    { imagem: '../../../assets/linguagens/cores-frutas/amarelo.png', posicaoCorreta: 0 },
-    { imagem: '../../../assets/linguagens/cores-frutas/roxo.png', posicaoCorreta: 1 },
-    { imagem: '../../../assets/linguagens/cores-frutas/vermelho.png', posicaoCorreta: 2 },
-    { imagem: '../../../assets/linguagens/cores-frutas/verde.png', posicaoCorreta: 3 }
+    { imagem: '../../../assets/lp/frutas/amarelo.png', posicaoCorreta: 0 },
+    { imagem: '../../../assets/lp/frutas/roxo.png', posicaoCorreta: 1 },
+    { imagem: '../../../assets/lp/frutas/vermelho.png', posicaoCorreta: 2 },
+    { imagem: '../../../assets/lp/frutas/verde.png', posicaoCorreta: 3 }
   ];
   public listaDrop: Drop[] = [];
   public x: string[] = ['-125px','25px','175px','325px'];
   public y: string = '50px';
   public acertou: boolean[] = [false, false, false, false];
   public acertouTudo: boolean = false;
-  public ativarLeoCurioso: boolean = true;
-  public ativarLeoFeliz: boolean = false;
-  public ativarLeoTriste: boolean = false;
-  public usuario: UsuarioConsulta = new UsuarioConsulta();
-  public recarregarPerfil: boolean = false;
 
   constructor(
     private interService: InternacionalizacaoService,
     private embaralharListaService: EmbaralharListaService,
-    private usuarioService: UsuarioService
+    private jogoService: JogoService
   ) { }
 
   ngOnInit() {
@@ -72,55 +67,24 @@ export class CoresFrutasComponent implements OnInit {
       event.previousIndex,
       event.currentIndex,
       );
-    //this.verificaRespostas(drop);
+    this.verificaRespostas(drop);
   }
 
-  /*public verificaRespostas(drop: Drop): void {
+  public verificaRespostas(drop: Drop): void {
     if(drop.puzzleList[0].posicaoCorreta == drop.posicao) {
       this.acertou[drop.posicao] = true;
-      this.ativarLeoCurioso = false;
-      this.ativarLeoFeliz = true;
-      this.ativarLeoTriste = false;
-      this.adicionarPontos();
+      this.jogoService.adicionarPontos();
+      ReacoesService.mudarReacao.emit('acertou');
     } else {
-      this.tirarPontos();
       this.acertou[drop.posicao] = false;
-      this.ativarLeoCurioso = false;
-      this.ativarLeoFeliz = false;
-      this.ativarLeoTriste = true;
+      this.jogoService.tirarPontos();
+      ReacoesService.mudarReacao.emit('triste');
     }
     if(this.acertou[0] && this.acertou[1] && this.acertou[2] && this.acertou[3]) {
       this.acertouTudo = true;
-      this.ativarLeoCurioso = false;
-      this.ativarLeoFeliz = false;
-      this.ativarLeoTriste = false;
-      this.adicionarNivel();
+      this.jogoService.adicionarNivel();
+      ReacoesService.mudarReacao.emit('acertou tudo');
     }
   }
-
-  public adicionarPontos(): void {
-    this.usuarioService.getUsuarioPorId(parseInt(localStorage.getItem('usuario'))).subscribe(usuario => {
-      this.usuario = usuario;
-      this.usuario.pontos++;
-      this.usuarioService.atualizarUsuario(this.usuario.id, this.usuario).subscribe(usuario => this.recarregarPerfil = !this.recarregarPerfil);
-    });
-  }
-
-  public adicionarNivel(): void {
-    this.usuarioService.getUsuarioPorId(parseInt(localStorage.getItem('usuario'))).subscribe(usuario => {
-      this.usuario = usuario;
-      this.usuario.nivel++;
-      this.usuario.pontos++;
-      this.usuarioService.atualizarUsuario(this.usuario.id, this.usuario).subscribe(usuario => this.recarregarPerfil = !this.recarregarPerfil);
-    });
-  }
-
-  public tirarPontos(): void {
-    this.usuarioService.getUsuarioPorId(parseInt(localStorage.getItem('usuario'))).subscribe(usuario => {
-      this.usuario = usuario;
-      this.usuario.pontos--;
-      this.usuarioService.atualizarUsuario(this.usuario.id, this.usuario).subscribe(usuario => this.recarregarPerfil = !this.recarregarPerfil);
-    });
-  }*/
 
 }

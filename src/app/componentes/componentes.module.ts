@@ -5,8 +5,8 @@ import { SoundComponent } from './sound/sound.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { ReloadComponent } from './reload/reload.component';
 import { ReacoesComponent } from './reacoes/reacoes.component';
-
-
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,16 +14,19 @@ import { ReacoesComponent } from './reacoes/reacoes.component';
     SoundComponent,
     PerfilComponent,
     ReloadComponent,
-    ReacoesComponent
+    ReacoesComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
+    HttpClientModule
   ], exports: [
     BtnBackComponent,
     SoundComponent,
     PerfilComponent,
     ReacoesComponent,
-    ReloadComponent
+    ReloadComponent,
+    BtnBackComponent,
   ]
 })
 export class ComponentesModule { }

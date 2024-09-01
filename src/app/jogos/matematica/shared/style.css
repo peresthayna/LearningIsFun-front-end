@@ -1,0 +1,9 @@
+.container-fluid {
+  background-color: #F6AAAA;
+  height: 768px;
+  display: inline-block;
+}
+
+p, h2 {
+  color: #000000;
+}

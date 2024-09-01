@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { DropItem } from '../shared/model/drop-item.model';
 import { Objeto } from '../shared/model/objeto.model';
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
-import { InternacionalizacaoService } from 'src/app/main/internacionalizacao/internacionalizacao.service';
 import { EmbaralharListaService } from '../shared/service/embaralha-lista.service';
 import { JogoService } from '../shared/service/jogo.service';
-import { ReacoesService } from 'src/app/componentes/shared/services/reacoes.service';
+import { InternacionalizacaoService } from '../../../main/internacionalizacao/internacionalizacao.service';
+import { ReacoesService } from '../../../componentes/shared/services/reacoes.service';
 
 @Component({
   selector: 'app-alfabeto',
@@ -27,7 +27,8 @@ export class AlfabetoComponent implements OnInit {
 
   constructor(private embaralharListaService: EmbaralharListaService,
     private interService: InternacionalizacaoService,
-    private jogoService: JogoService) { }
+    private jogoService: JogoService) {
+    }
 
   ngOnInit() {
     this.macas = this.getMacas(this.lista);

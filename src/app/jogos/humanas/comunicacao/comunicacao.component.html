@@ -1,0 +1,27 @@
+<app-perfil></app-perfil>
+<app-btn-back></app-btn-back>
+<app-reacoes></app-reacoes>
+<app-sound></app-sound>
+<app-reload></app-reload>
+<div class="container-fluid">
+  <div class="text-center" style="color: #FFFFFF;">
+    <h2>{{ literals.jogoIniciaisDescricao }}</h2>
+    <p>{{ literals.jogoIniciaisDica }}</p>
+  </div>
+  <div class="row" *ngIf="palavras">
+    <div class="col-3 p-2" *ngFor="let palavra of palavras">
+      <div class="card">
+        <img [src]="palavra.imagem"  class="card-img-top">
+        <div class="card-body">
+          <div class="palavra text-center">
+            <h5>{{ palavra.palavra }}</h5>
+          </div>
+          <ul class="list-group list-group-horizontal text-center">
+            <button class="btn-heart" *ngFor="let resposta of palavra.respostas" [disabled]="resposta.isBloqueado" (click)="verificarResposta(palavra, resposta)">
+            <li class="list-group-item" [ngStyle]="{'background-color': resposta.cor}">{{resposta.resposta}}</li></button>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

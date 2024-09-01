@@ -1,12 +1,10 @@
 import { Palavra } from './../shared/model/palavra.model';
 import { Component, OnInit } from '@angular/core';
-import { InternacionalizacaoService } from 'src/app/main/internacionalizacao/internacionalizacao.service';
 import { Resposta } from '../shared/model/resposta.model';
-import { UsuarioConsulta } from 'src/app/main/usuario/shared/model/usuario-consulta.dto.model';
 import { EmbaralharListaService } from '../shared/service/embaralha-lista.service';
-import { UsuarioService } from 'src/app/main/usuario/shared/service/usuario.service';
 import { JogoService } from '../shared/service/jogo.service';
-import { ReacoesService } from 'src/app/componentes/shared/services/reacoes.service';
+import { InternacionalizacaoService } from '../../../main/internacionalizacao/internacionalizacao.service';
+import { ReacoesService } from '../../../componentes/shared/services/reacoes.service';
 
 @Component({
   selector: 'app-iniciais',

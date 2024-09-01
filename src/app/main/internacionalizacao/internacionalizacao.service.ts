@@ -11,9 +11,7 @@ export class InternacionalizacaoService {
   private idiomas: string[] = ['pt-br', 'en-us', 'es-es'];
   private idiomaPadrao: string = 'pt-br';
 
-  constructor() {
-
-  }
+  constructor() { }
 
   public getIdioma(): any {
     let idioma = this.getIdiomaSelecionado();

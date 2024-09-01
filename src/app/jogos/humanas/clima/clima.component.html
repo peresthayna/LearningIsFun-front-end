@@ -1,0 +1,41 @@
+<app-btn-back></app-btn-back>
+<app-perfil></app-perfil>
+<app-reacoes></app-reacoes>
+<app-reload></app-reload>
+<div class="container-fluid">
+  <div class="text-center mt-3" style="color: #FFFFFF;">
+    <h2>{{ literals.jogoClimaDescricao }}</h2>
+    <p>{{ literals.jogoClimaDica }}</p>
+  </div>
+  <div class="row" cdkDropListGroup>
+    <div class="col-6">
+      <div class="drop-place-sun">
+        <div [ngStyle]="{'margin-top':listaDrop[0].posicaoY, 'margin-left':listaDrop[0].posicaoX}">
+          <div class="drop icons" cdkDropList [cdkDropListData]="listaDrop[0].puzzleList" (cdkDropListDropped)="dropResposta($event, listaDrop[0])">
+            <div class="label text-center">
+              <img class="column" src="../../../assets/humanas/clima/sol.jpg"><hr>
+            </div>
+            <img *ngFor="let puzzle of listaDrop[0].puzzleList" [cdkDragDisabled]="acertouTudo" cdkDrag [src]="puzzle.imagem" class="icons">
+          </div>
+        </div>
+      </div>
+      <div class="drop-place-rain">
+        <div [ngStyle]="{'margin-top':listaDrop[1].posicaoY, 'margin-left':listaDrop[1].posicaoX}">
+          <div class="drop icons" cdkDropList [cdkDropListData]="listaDrop[1].puzzleList" (cdkDropListDropped)="dropResposta($event, listaDrop[1])">
+            <div class="label text-center">
+              <img class="column" src="../../../assets/humanas/clima/chuva.png"><hr>
+            </div>
+            <img *ngFor="let puzzle of listaDrop[1].puzzleList" [cdkDragDisabled]="acertouTudo" cdkDrag [src]="puzzle.imagem" class="icons">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="text-center">
+        <div class="puzzle-list" cdkDropList [cdkDropListData]="itensClima" (cdkDropListDropped)="drop($event)">
+          <img *ngFor="let item of itensClima" [cdkDragDisabled]="acertouTudo" cdkDrag [src]="item.imagem" class="icons">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

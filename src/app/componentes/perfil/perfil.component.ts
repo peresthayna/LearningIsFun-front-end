@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UsuarioConsulta } from 'src/app/main/usuario/shared/model/usuario-consulta.dto.model';
-import { UsuarioService } from 'src/app/main/usuario/shared/service/usuario.service';
+import { UsuarioConsulta } from '../../main/usuario/shared/model/usuario-consulta.dto.model';
+import { UsuarioService } from '../../main/usuario/shared/service/usuario.service';
+import { TextToSpeechService } from '../shared/services/text-to-speech.service';
 
 @Component({
   selector: 'app-perfil',
@@ -12,7 +13,10 @@ export class PerfilComponent implements OnInit {
   public usuario: UsuarioConsulta = new UsuarioConsulta();
   public podeExibir: boolean = false;
 
-  constructor(private usuarioService: UsuarioService) { }
+  constructor(
+    private usuarioService: UsuarioService,
+    private ttsService: TextToSpeechService,
+  ) { }
 
   ngOnInit(): void {
     this.usuario = this.usuarioService.obterUsuarioLogado;
@@ -24,6 +28,14 @@ export class PerfilComponent implements OnInit {
     this.usuarioService.deslogar();
     this.podeExibir = false;
     window.location.reload();
+  }
+
+  public lerTexto(texto: string): void {
+    this.ttsService.lerTexto(texto);
+  }
+
+  public pararLeitura(): void {
+    this.ttsService.pararLeitura();
   }
 
 }

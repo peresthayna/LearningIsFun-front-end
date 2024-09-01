@@ -1,0 +1,24 @@
+<app-btn-back></app-btn-back>
+<app-perfil></app-perfil>
+<app-reacoes></app-reacoes>
+<app-reload></app-reload>
+<div class="container-fluid">
+  <div class="text-center mt-3" style="color: #FFFFFF;">
+    <h2>{{ literals.jogoCoracoesDescricao }}</h2>
+    <p>{{ literals.jogoCoracoesDica }}</p>
+  </div>
+  <div class="row mt-5" *ngIf="coracoes">
+    <div class="col-3 p-2" *ngFor="let coracao of coracoes">
+      <div class="card">
+        <img [src]="coracao.imagem"  class="card-img-top">
+        <div class="card-body">
+          <ul class="list-group list-group-horizontal text-center">
+            <button class="btn-heart" *ngFor="let resposta of coracao.respostas" [disabled]="resposta.isBloqueado" (click)="verificarResposta(coracao, resposta)">
+            <li class="list-group-item" [ngStyle]="{'background-color': resposta.cor}">{{resposta.resposta}}</li></button>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-reload></app-reload>
+</div>

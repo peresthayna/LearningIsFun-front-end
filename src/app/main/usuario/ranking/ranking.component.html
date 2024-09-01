@@ -20,7 +20,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let usuario of usuarios; let i = index" class="tbody" (mouseenter)="lerTexto(usuario.nome + '. ' + (i+1) + 'º lugar. Nível ' + usuario.nivel + '. ' + usuario.pontuacao + ' pontos.')" (mouseleave)="pararLeitura()">
+        <tr *ngFor="let usuario of usuarios; let i = index" class="tbody"
+          (mouseenter)="lerTexto(usuario.nome + '. ' + (i+1) + literals.posicao + '. ' + literals.rankingNivel + usuario.nivel + '. ' + usuario.pontuacao + literals.rankingPontos)" (mouseleave)="pararLeitura()">
           <td><img class="avatar" [src]="usuario.avatar"><br>{{ usuario.nome }}</td>
           <td style="width: 5px;" class="trofeu"><img *ngIf="usuario.trofeu != ''" [src]="usuario.trofeu"></td>
           <td>{{ usuario.nivel }} <img class="star" src="assets/main/xp.png"></td>

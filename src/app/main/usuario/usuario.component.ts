@@ -4,8 +4,7 @@ import { UsuarioCadastro } from './shared/model/usuario-cadastro.dto.model';
 import { Router } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { InternacionalizacaoService } from '../internacionalizacao/internacionalizacao.service';
-import { TextToSpeechService } from '../internacionalizacao/text-to-speech.service';
-import { UsuarioConsulta } from './shared/model/usuario-consulta.dto.model';
+import { TextToSpeechService } from '../../componentes/shared/services/text-to-speech.service';
 
 @Component({
   selector: 'app-usuario',
@@ -32,8 +31,8 @@ export class UsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.literals = this.interService.getIdioma();
-    this.ttsService.stop();
-    this.ttsService.speak('Insira seu nome e escolha um avatar');
+    this.ttsService.pararLeitura();
+    this.ttsService.lerTexto(this.literals.inserirNome + '. ' + this.literals.escolherAvatar);
   }
 
   public onValidateName(): void {
@@ -57,10 +56,9 @@ export class UsuarioComponent implements OnInit {
       });
     },
     (error: HttpErrorResponse) => {
-      this.ttsService.speak('Não deu certo! Vamos tentar de novo?');
+      this.ttsService.lerTexto(this.literals.naoDeuCerto);
       this.nome = '';
       this.avatarEscolhido = '';
-      this.ttsService.speak('Insira seu nome e escolha um avatar');
     });
   }
 

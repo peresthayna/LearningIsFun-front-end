@@ -1,13 +1,13 @@
 <div class="card text-center" *ngIf="podeExibir">
   <div class="card-body row">
     <div class="col-6">
-      <img [src]="usuario.avatar" class="avatar">
-      <h3 class="card-title">{{ usuario.nome }}</h3>
+      <img [src]="usuario.avatar" class="avatar" (mouseenter)="lerTexto('Seu avatar')"  (mouseleave)="pararLeitura()">
+      <h6 class="card-title" (mouseenter)="lerTexto('Seu nome é' + usuario.nome)"  (mouseleave)="pararLeitura()">{{ usuario.nome }}</h6>
     </div>
     <div class="card-text col-6">
-      <button class="btn" (click)="logout()"><img src="assets/main/logoff.png" class="logoff"></button>
-      <h4 class="m-0 pt-1">{{ usuario.nivel }} <img src="assets/main/xp.png"></h4>
-      <h4 class="m-0">{{ usuario.pontuacao }} <img src="assets/main/star.png"></h4>
+      <button class="btn" (click)="logout()"><img src="assets/main/logoff.png" class="logoff" (mouseenter)="lerTexto('Sair da conta')"  (mouseleave)="pararLeitura()"></button>
+      <h5 class="m-0 pt-1">{{ usuario.nivel }} <img src="assets/main/xp.png" (mouseenter)="lerTexto('Nível' + usuario.nivel)"  (mouseleave)="pararLeitura()"></h5>
+      <h5 class="m-0">{{ usuario.pontuacao }} <img src="assets/main/star.png" (mouseenter)="lerTexto(usuario.pontuacao + 'pontos')"  (mouseleave)="pararLeitura()"></h5>
     </div>
   </div>
 </div>
