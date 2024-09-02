@@ -30,14 +30,14 @@ export class SeresVivosComponent {
 
   public getPalavras(): void {
     ReacoesService.mudarReacao.emit('curiosa');
-    this.palavras[0] = new Palavra(); this.palavras[0].palavra = this.literals.palavraHumano; this.palavras[0].respostaCerta = 'H';
-    this.palavras[1] = new Palavra(); this.palavras[1].palavra = this.literals.palavraBorboleta; this.palavras[1].respostaCerta = 'B';
-    this.palavras[2] = new Palavra(); this.palavras[2].palavra = this.literals.palavraTartaruga; this.palavras[2].respostaCerta = 'T';
-    this.palavras[3] = new Palavra(); this.palavras[3].palavra = this.literals.palavraCogumelo; this.palavras[3].respostaCerta = 'C';
-    this.palavras[4] = new Palavra(); this.palavras[4].palavra = this.literals.palavraPeixe; this.palavras[4].respostaCerta = 'P';
-    this.palavras[5] = new Palavra(); this.palavras[5].palavra = this.literals.palavraSapo; this.palavras[5].respostaCerta = 'S';
-    this.palavras[6] = new Palavra(); this.palavras[6].palavra = this.literals.palavraFlor; this.palavras[6].respostaCerta = 'F';
-    this.palavras[7] = new Palavra(); this.palavras[7].palavra = this.literals.palavraBaleia; this.palavras[7].respostaCerta = 'B';
+    this.palavras[0] = new Palavra(); this.palavras[0].palavra = this.literals.palavraHumano; this.palavras[0].respostaCerta = this.literals.respostaHumano;
+    this.palavras[1] = new Palavra(); this.palavras[1].palavra = this.literals.palavraBorboleta; this.palavras[1].respostaCerta = this.literals.respostaBorboleta;
+    this.palavras[2] = new Palavra(); this.palavras[2].palavra = this.literals.palavraTartaruga; this.palavras[2].respostaCerta = this.literals.respostaTartaruga;
+    this.palavras[3] = new Palavra(); this.palavras[3].palavra = this.literals.palavraCogumelo; this.palavras[3].respostaCerta = this.literals.respostaCogumelo;
+    this.palavras[4] = new Palavra(); this.palavras[4].palavra = this.literals.palavraPeixe; this.palavras[4].respostaCerta = this.literals.respostaPeixe;
+    this.palavras[5] = new Palavra(); this.palavras[5].palavra = this.literals.palavraSapo; this.palavras[5].respostaCerta = this.literals.respostaSapo;
+    this.palavras[6] = new Palavra(); this.palavras[6].palavra = this.literals.palavraFlor; this.palavras[6].respostaCerta = this.literals.respostaFlor;
+    this.palavras[7] = new Palavra(); this.palavras[7].palavra = this.literals.palavraBaleia; this.palavras[7].respostaCerta = this.literals.respostaBaleia;
     this.embaralhaListaService.embaralhaLista(this.alfabeto);
     for(let i=0; i<8; i++) {
       this.palavras[i].respostas[0] = new Resposta();
