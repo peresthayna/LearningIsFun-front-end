@@ -24,34 +24,34 @@ export class SeresVivosComponent {
   ) { }
 
   ngOnInit() {
-    this.getPalavras();
     this.literals = this.interService.getIdioma();
+    this.getPalavras();
   }
 
   public getPalavras(): void {
     ReacoesService.mudarReacao.emit('curiosa');
-    this.palavras[0] = new Palavra(); this.palavras[0].palavra = '_UMANO'; this.palavras[0].respostaCerta = 'H';
-    this.palavras[1] = new Palavra(); this.palavras[1].palavra = '_ORBOLETA'; this.palavras[1].respostaCerta = 'B';
-    this.palavras[2] = new Palavra(); this.palavras[2].palavra = '_ARTARUGA'; this.palavras[2].respostaCerta = 'T';
-    this.palavras[3] = new Palavra(); this.palavras[3].palavra = '_OGUMELO'; this.palavras[3].respostaCerta = 'C';
-    this.palavras[4] = new Palavra(); this.palavras[4].palavra = '_EIXE'; this.palavras[4].respostaCerta = 'P';
-    this.palavras[5] = new Palavra(); this.palavras[5].palavra = '_APO'; this.palavras[5].respostaCerta = 'S';
-    this.palavras[6] = new Palavra(); this.palavras[6].palavra = '_LOR'; this.palavras[6].respostaCerta = 'F';
-    this.palavras[7] = new Palavra(); this.palavras[7].palavra = '_ALEIA'; this.palavras[7].respostaCerta = 'B';
+    this.palavras[0] = new Palavra(); this.palavras[0].palavra = this.literals.palavraHumano; this.palavras[0].respostaCerta = 'H';
+    this.palavras[1] = new Palavra(); this.palavras[1].palavra = this.literals.palavraBorboleta; this.palavras[1].respostaCerta = 'B';
+    this.palavras[2] = new Palavra(); this.palavras[2].palavra = this.literals.palavraTartaruga; this.palavras[2].respostaCerta = 'T';
+    this.palavras[3] = new Palavra(); this.palavras[3].palavra = this.literals.palavraCogumelo; this.palavras[3].respostaCerta = 'C';
+    this.palavras[4] = new Palavra(); this.palavras[4].palavra = this.literals.palavraPeixe; this.palavras[4].respostaCerta = 'P';
+    this.palavras[5] = new Palavra(); this.palavras[5].palavra = this.literals.palavraSapo; this.palavras[5].respostaCerta = 'S';
+    this.palavras[6] = new Palavra(); this.palavras[6].palavra = this.literals.palavraFlor; this.palavras[6].respostaCerta = 'F';
+    this.palavras[7] = new Palavra(); this.palavras[7].palavra = this.literals.palavraBaleia; this.palavras[7].respostaCerta = 'B';
     this.embaralhaListaService.embaralhaLista(this.alfabeto);
     for(let i=0; i<8; i++) {
       this.palavras[i].respostas[0] = new Resposta();
       this.palavras[i].respostas[1] = new Resposta();
       this.palavras[i].respostas[2] = new Resposta();
     }
-    this.palavras[0].respostas[0].resposta = 'H';
-    this.palavras[1].respostas[0].resposta = 'B';
-    this.palavras[2].respostas[0].resposta = 'T';
-    this.palavras[3].respostas[0].resposta = 'C';
-    this.palavras[4].respostas[0].resposta = 'P';
-    this.palavras[5].respostas[0].resposta = 'S';
-    this.palavras[6].respostas[0].resposta = 'F';
-    this.palavras[7].respostas[0].resposta = 'B';
+    this.palavras[0].respostas[0].resposta = this.literals.respostaHumano;
+    this.palavras[1].respostas[0].resposta = this.literals.respostaBorboleta;
+    this.palavras[2].respostas[0].resposta = this.literals.respostaTartaruga;
+    this.palavras[3].respostas[0].resposta = this.literals.respostaCogumelo;
+    this.palavras[4].respostas[0].resposta = this.literals.respostaPeixe;
+    this.palavras[5].respostas[0].resposta = this.literals.respostaSapo;
+    this.palavras[6].respostas[0].resposta = this.literals.respostaFlor;
+    this.palavras[7].respostas[0].resposta = this.literals.respostaBaleia;
     for(let i=0; i<8; i++) {
       this.palavras[i].imagem = '/assets/ciencias/seres-vivos/' + (i+1) + '.png';
       this.embaralhaListaService.embaralhaLista(this.alfabeto);

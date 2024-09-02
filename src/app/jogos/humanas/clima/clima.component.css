@@ -1,62 +1,33 @@
+.clima-img {
+  width: 80px;
+  height: 80px;
+}
+
 .icons {
-  width: 69px;
-  height: 69px;
-  background-color: #FFFFFF;
-}
-
-.column {
-  width: 70px;
-  height: 70px;
-}
-
-.label {
-  width: 100%;
   background-color: white;
+  margin: 2px;
 }
 
-.drop-place-sun {
-  width: 250px;
-  height: 380px;
-  margin-left: 50px;
+.block {
+  max-height: 24rem;
   border: 1px solid white;
+  overflow: auto;
 }
 
-.drop-place-rain {
-  width: 250px;
-  height: 380px;
-  border: 1px solid white;
+.block::-webkit-scrollbar {
+  width: 1px;
 }
 
-.col-6 {
-  display: inline-block;
+.block::-webkit-scrollbar-thumb {
+  background: transparent;
 }
 
-.drop {
-  background-color: #FFFFFF;
-  border-radius: 50%;
-  position: absolute;
+.block::-webkit-scrollbar-thumb:hover {
+  background: transparent;
 }
 
-.puzzle-list {
-  border: solid 1px #ccc;
-  background: white;
-  border-radius: 4px;
-  overflow: hidden;
-  position: relative;
-  margin-top: 125px;
-  width: 550px;
-  height: 170px;
-}
-
-.example-box {
-  padding: 20px 10px;
-  border-bottom: solid 1px #ccc;
-  color: rgba(0, 0, 0, 0.87);
-  align-items: center;
-  box-sizing: border-box;
-  cursor: move;
-  background: white;
-  font-size: 14px;
+.p40 {
+  margin-top: 40px;
 }
 
 .cdk-drag-preview {

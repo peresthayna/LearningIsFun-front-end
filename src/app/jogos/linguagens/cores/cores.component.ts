@@ -31,34 +31,34 @@ export class CoresComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getPalavras();
     this.literals = this.interService.getIdioma();
+    this.getPalavras();
   }
 
   public getPalavras(): void {
     this.ativarLeoCurioso = true;
-    this.palavras[0] = new Palavra(); this.palavras[0].palavra = '_ERMELHO'; this.palavras[0].respostaCerta = 'V';
-    this.palavras[1] = new Palavra(); this.palavras[1].palavra = '_ERDE'; this.palavras[1].respostaCerta = 'V';
-    this.palavras[2] = new Palavra(); this.palavras[2].palavra = '_ZUL'; this.palavras[2].respostaCerta = 'A';
-    this.palavras[3] = new Palavra(); this.palavras[3].palavra = '_OXO'; this.palavras[3].respostaCerta = 'R';
-    this.palavras[4] = new Palavra(); this.palavras[4].palavra = '_OSA'; this.palavras[4].respostaCerta = 'R';
-    this.palavras[5] = new Palavra(); this.palavras[5].palavra = '_MARELO'; this.palavras[5].respostaCerta = 'A';
-    this.palavras[6] = new Palavra(); this.palavras[6].palavra = '_ARROM'; this.palavras[6].respostaCerta = 'M';
-    this.palavras[7] = new Palavra(); this.palavras[7].palavra = '_RETO'; this.palavras[7].respostaCerta = 'P';
+    this.palavras[0] = new Palavra(); this.palavras[0].palavra = this.literals.palavraVermelho; this.palavras[0].respostaCerta = 'V';
+    this.palavras[1] = new Palavra(); this.palavras[1].palavra = this.literals.palavraVerde; this.palavras[1].respostaCerta = 'V';
+    this.palavras[2] = new Palavra(); this.palavras[2].palavra = this.literals.palavraAzul; this.palavras[2].respostaCerta = 'A';
+    this.palavras[3] = new Palavra(); this.palavras[3].palavra = this.literals.palavraRoxo; this.palavras[3].respostaCerta = 'R';
+    this.palavras[4] = new Palavra(); this.palavras[4].palavra = this.literals.palavraRosa; this.palavras[4].respostaCerta = 'R';
+    this.palavras[5] = new Palavra(); this.palavras[5].palavra = this.literals.palavraAmarelo; this.palavras[5].respostaCerta = 'A';
+    this.palavras[6] = new Palavra(); this.palavras[6].palavra = this.literals.palavraMarrom; this.palavras[6].respostaCerta = 'M';
+    this.palavras[7] = new Palavra(); this.palavras[7].palavra = this.literals.palavraPreto; this.palavras[7].respostaCerta = 'P';
     this.embaralhaListaService.embaralhaLista(this.alfabeto);
     for(let i=0; i<8; i++) {
       this.palavras[i].respostas[0] = new Resposta();
       this.palavras[i].respostas[1] = new Resposta();
       this.palavras[i].respostas[2] = new Resposta();
     }
-    this.palavras[0].respostas[0].resposta = 'V';
-    this.palavras[1].respostas[0].resposta = 'V';
-    this.palavras[2].respostas[0].resposta = 'A';
-    this.palavras[3].respostas[0].resposta = 'R';
-    this.palavras[4].respostas[0].resposta = 'R';
-    this.palavras[5].respostas[0].resposta = 'A';
-    this.palavras[6].respostas[0].resposta = 'M';
-    this.palavras[7].respostas[0].resposta = 'P';
+    this.palavras[0].respostas[0].resposta = this.literals.respostaVermelho;
+    this.palavras[1].respostas[0].resposta = this.literals.respostaVerde;
+    this.palavras[2].respostas[0].resposta = this.literals.respostaAzul;
+    this.palavras[3].respostas[0].resposta = this.literals.respostaRoxo;
+    this.palavras[4].respostas[0].resposta = this.literals.respostaRosa;
+    this.palavras[5].respostas[0].resposta = this.literals.respostaAmarelo;
+    this.palavras[6].respostas[0].resposta = this.literals.respostaMarrom;
+    this.palavras[7].respostas[0].resposta = this.literals.respostaPreto;
     for(let i=0; i<8; i++) {
       this.palavras[i].imagem = '/assets/lp/cores/' + (i+1) + '.png';
       this.embaralhaListaService.embaralhaLista(this.alfabeto);

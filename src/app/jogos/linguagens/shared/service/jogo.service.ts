@@ -16,13 +16,14 @@ export class JogoService {
   }
 
   public adicionarPontos(): void {
-    JogoService.usuarioLogado.pontuacao++;
+    JogoService.usuarioLogado.pontuacao += 10;
     this.usuarioService.atualizarUsuario(JogoService.usuarioLogado.id, JogoService.usuarioLogado).subscribe(
       () => UsuarioService.recarregar.emit(true)
     );
   }
 
   public adicionarNivel(): void {
+    JogoService.usuarioLogado.pontuacao += 100;
     JogoService.usuarioLogado.nivel++;
     this.usuarioService.atualizarUsuario(JogoService.usuarioLogado.id, JogoService.usuarioLogado).subscribe(
       () => UsuarioService.recarregar.emit(true)

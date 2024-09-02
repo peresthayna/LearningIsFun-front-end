@@ -24,34 +24,34 @@ export class ComunicacaoComponent {
   ) { }
 
   ngOnInit() {
-    this.getPalavras();
     this.literals = this.interService.getIdioma();
+    this.getPalavras();
   }
 
   public getPalavras(): void {
     ReacoesService.mudarReacao.emit('curiosa');
-    this.palavras[0] = new Palavra(); this.palavras[0].palavra = '_ELEVISÃO'; this.palavras[0].respostaCerta = 'T';
-    this.palavras[1] = new Palavra(); this.palavras[1].palavra = '_ÁDIO'; this.palavras[1].respostaCerta = 'R';
-    this.palavras[2] = new Palavra(); this.palavras[2].palavra = '_ORNAL'; this.palavras[2].respostaCerta = 'J';
-    this.palavras[3] = new Palavra(); this.palavras[3].palavra = '_EVISTA'; this.palavras[3].respostaCerta = 'R';
-    this.palavras[4] = new Palavra(); this.palavras[4].palavra = '_INEMA'; this.palavras[4].respostaCerta = 'C';
-    this.palavras[5] = new Palavra(); this.palavras[5].palavra = '_EATRO'; this.palavras[5].respostaCerta = 'T';
-    this.palavras[6] = new Palavra(); this.palavras[6].palavra = '_ELULAR'; this.palavras[6].respostaCerta = 'C';
-    this.palavras[7] = new Palavra(); this.palavras[7].palavra = '_OMPUTADOR'; this.palavras[7].respostaCerta = 'C';
+    this.palavras[0] = new Palavra(); this.palavras[0].palavra = this.literals.palavraTelevisao; this.palavras[0].respostaCerta = 'T';
+    this.palavras[1] = new Palavra(); this.palavras[1].palavra = this.literals.palavraRadio; this.palavras[1].respostaCerta = 'R';
+    this.palavras[2] = new Palavra(); this.palavras[2].palavra = this.literals.palavraJornal; this.palavras[2].respostaCerta = 'J';
+    this.palavras[3] = new Palavra(); this.palavras[3].palavra = this.literals.palavraRevista; this.palavras[3].respostaCerta = 'R';
+    this.palavras[4] = new Palavra(); this.palavras[4].palavra = this.literals.palavraCinema; this.palavras[4].respostaCerta = 'C';
+    this.palavras[5] = new Palavra(); this.palavras[5].palavra = this.literals.palavraTeatro; this.palavras[5].respostaCerta = 'T';
+    this.palavras[6] = new Palavra(); this.palavras[6].palavra = this.literals.palavraCelular; this.palavras[6].respostaCerta = 'C';
+    this.palavras[7] = new Palavra(); this.palavras[7].palavra = this.literals.palavraComputador; this.palavras[7].respostaCerta = 'C';
     this.embaralhaListaService.embaralhaLista(this.alfabeto);
     for(let i=0; i<8; i++) {
       this.palavras[i].respostas[0] = new Resposta();
       this.palavras[i].respostas[1] = new Resposta();
       this.palavras[i].respostas[2] = new Resposta();
     }
-    this.palavras[0].respostas[0].resposta = 'T';
-    this.palavras[1].respostas[0].resposta = 'R';
-    this.palavras[2].respostas[0].resposta = 'J';
-    this.palavras[3].respostas[0].resposta = 'R';
-    this.palavras[4].respostas[0].resposta = 'C';
-    this.palavras[5].respostas[0].resposta = 'T';
-    this.palavras[6].respostas[0].resposta = 'C';
-    this.palavras[7].respostas[0].resposta = 'C';
+    this.palavras[0].respostas[0].resposta = this.literals.respostaTelevisao;
+    this.palavras[1].respostas[0].resposta = this.literals.respostaRadio;
+    this.palavras[2].respostas[0].resposta = this.literals.respostaJornal;
+    this.palavras[3].respostas[0].resposta = this.literals.respostaRevista;
+    this.palavras[4].respostas[0].resposta = this.literals.respostaCinema;
+    this.palavras[5].respostas[0].resposta = this.literals.respostaTeatro;
+    this.palavras[6].respostas[0].resposta = this.literals.respostaCelular;
+    this.palavras[7].respostas[0].resposta = this.literals.respostaComputador;
     for(let i=0; i<8; i++) {
       this.palavras[i].imagem = '/assets/humanas/comunicacao/' + (i+1) + '.png';
       this.embaralhaListaService.embaralhaLista(this.alfabeto);
