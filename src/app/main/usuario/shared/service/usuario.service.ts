@@ -49,6 +49,7 @@ export class UsuarioService {
 
   /*LOGIN*/
   public logar(usuario: UsuarioConsulta): void {
+    localStorage.clear();
     localStorage.setItem('usuario', JSON.stringify(usuario));
     this.router.navigate(['']);
   }
