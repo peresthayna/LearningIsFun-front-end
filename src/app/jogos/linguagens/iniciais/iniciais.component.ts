@@ -34,7 +34,7 @@ export class IniciaisComponent implements OnInit {
     this.palavras[0] = new Palavra(); this.palavras[0].palavra = this.literals.palavraBola; this.palavras[0].respostaCerta = this.literals.respostaBola;
     this.palavras[1] = new Palavra(); this.palavras[1].palavra = this.literals.palavraAviao; this.palavras[1].respostaCerta = this.literals.respostaAviao;
     this.palavras[2] = new Palavra(); this.palavras[2].palavra = this.literals.palavraCasa; this.palavras[2].respostaCerta = this.literals.respostaCasa;
-    this.palavras[3] = new Palavra(); this.palavras[3].palavra = this.literals.palavraCasaco; this.palavras[3].respostaCerta = this.literals.respostaCasaco;
+    this.palavras[3] = new Palavra(); this.palavras[3].palavra = this.literals.palavraMacaco; this.palavras[3].respostaCerta = this.literals.respostaMacaco;
     this.palavras[4] = new Palavra(); this.palavras[4].palavra = this.literals.palavraLua; this.palavras[4].respostaCerta = this.literals.respostaLua;
     this.palavras[5] = new Palavra(); this.palavras[5].palavra = this.literals.palavraOvo; this.palavras[5].respostaCerta = this.literals.respostaOvo;
     this.palavras[6] = new Palavra(); this.palavras[6].palavra = this.literals.palavraEstrela; this.palavras[6].respostaCerta = this.literals.respostaEstrela;
@@ -48,7 +48,7 @@ export class IniciaisComponent implements OnInit {
     this.palavras[0].respostas[0].resposta = this.literals.respostaBola;
     this.palavras[1].respostas[0].resposta = this.literals.respostaAviao;
     this.palavras[2].respostas[0].resposta = this.literals.respostaCasa;
-    this.palavras[3].respostas[0].resposta = this.literals.respostaCasaco;
+    this.palavras[3].respostas[0].resposta = this.literals.respostaMacaco;
     this.palavras[4].respostas[0].resposta = this.literals.respostaLua;
     this.palavras[5].respostas[0].resposta = this.literals.respostaOvo;
     this.palavras[6].respostas[0].resposta = this.literals.respostaEstrela;
