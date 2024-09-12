@@ -28,7 +28,6 @@ export class EscolherUsuarioComponent implements OnInit {
     this.ttsService.pararLeitura();
     this.getUsuarios();
     this.literals = this.interService.getIdioma();
-    this.ttsService.lerTexto(this.literals.selecionarJogador);
   }
 
   public getUsuarios(): void {
@@ -51,11 +50,22 @@ export class EscolherUsuarioComponent implements OnInit {
   }
 
   public deletarUsuario(usuario: UsuarioConsulta): void {
-    this.usuarioService.deletarUsuario(usuario.id).subscribe(
-      () => alert('Excluído com sucesso!'),
-      (error: HttpErrorResponse) => alert(this.literals.erroExcluir));
-    window.location.reload();
-    this.getUsuarios();
+    this.ttsService.lerTexto(this.literals.confirmarExclusao);
+    setTimeout(() => {
+      let resposta = confirm(this.literals.confirmarExclusao);
+      if(resposta) {
+        this.usuarioService.deletarUsuario(usuario.id).subscribe(
+          () => {
+            this.ttsService.lerTexto(this.literals.confirmacaoExclusao);
+            if(usuario.id == this.usuarioService.obterIdUsuarioLogado) {
+              this.usuarioService.deslogar();
+            }
+            window.location.reload();
+            this.getUsuarios();
+          },
+          (error: HttpErrorResponse) => this.ttsService.lerTexto(this.literals.erroExcluir));
+        }
+      }, 1000);
   }
 
   public lerTexto(texto: string): void {

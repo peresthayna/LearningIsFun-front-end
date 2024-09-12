@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TextToSpeechService } from '../shared/services/text-to-speech.service';
+import { InternacionalizacaoService } from '../../main/internacionalizacao/internacionalizacao.service';
 
 @Component({
   selector: 'app-reload',
@@ -8,9 +9,15 @@ import { TextToSpeechService } from '../shared/services/text-to-speech.service';
 })
 export class ReloadComponent implements OnInit {
 
-  constructor(private ttsService: TextToSpeechService) { }
+  public literals: any;
+
+  constructor(
+    private ttsService: TextToSpeechService,
+    public interService: InternacionalizacaoService
+  ) { }
 
   ngOnInit(): void {
+    this.literals = this.interService.getIdioma();
   }
 
   public reload(): void {
@@ -18,7 +25,7 @@ export class ReloadComponent implements OnInit {
   }
 
   public lerTexto(): void {
-    this.ttsService.lerTexto('Jogar novamente');
+    this.ttsService.lerTexto(this.literals.reload);
   }
 
   public pararLeitura(): void {

@@ -9,7 +9,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { LinguagensComponent } from './linguagens/linguagens.component';
 import { TemasComponent } from './temas/temas.component';
 import { FormsModule } from '@angular/forms';
-
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,8 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     ComponentesModule,
     TooltipModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ]
 })
 export class MainModule { }
