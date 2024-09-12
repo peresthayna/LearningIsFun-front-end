@@ -241,4 +241,9 @@ export const en_us = {
   morango: 'strawberry',
   uva: 'grape',
   pera: 'pear',
+  //formas
+  quadrado: 'square',
+  circulo: 'circle',
+  retangulo: 'rectangle',
+  triangulo: 'triangle',
 }

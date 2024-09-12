@@ -242,5 +242,10 @@ export const pt_br = {
   morango: 'morango',
   uva: 'uva',
   pera: 'pêra',
+  //formas
+  quadrado: 'quadrado',
+  circulo: 'círculo',
+  retangulo: 'retângulo',
+  triangulo: 'triângulo',
 
 }
