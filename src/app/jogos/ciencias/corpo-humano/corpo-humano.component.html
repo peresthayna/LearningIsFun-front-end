@@ -2,6 +2,7 @@
 <app-perfil></app-perfil>
 <app-reacoes></app-reacoes>
 <app-reload></app-reload>
+<app-sound></app-sound>
 <div class="container-fluid">
   <div class="text-center mt-3" style="color: #FFFFFF;">
     <h2>{{ literals.jogoCorpoHumanoDescricao }}</h2>
@@ -11,8 +12,8 @@
       <div class="col-6">
         <div class="drop-place">
           <div *ngFor="let drop of listaDrop" [ngStyle]="{'margin-top':drop.posicaoY, 'margin-left':drop.posicaoX}">
-            <div class="drop icons" cdkDropList [cdkDropListData]="drop.puzzleList" (cdkDropListDropped)="dropResposta($event, drop)">
-            <img *ngFor="let puzzle of drop.puzzleList" [cdkDragDisabled]="acertouTudo" cdkDrag [src]="puzzle.imagem" class="icons">
+            <div class="drop icons" cdkDropList [cdkDropListData]="drop.puzzleList" (cdkDropListDropped)="dropResposta($event, drop)" (mouseenter)="lerTexto(drop.nome)" (mouseleave)="parar()">
+              <img *ngFor="let puzzle of drop.puzzleList" [cdkDragDisabled]="acertouTudo" cdkDrag [src]="puzzle.imagem" class="icons">
             </div>
           </div>
         </div>
@@ -20,7 +21,7 @@
       <div class="col-6">
         <div class="text-center">
           <div class="puzzle-list" cdkDropList [cdkDropListData]="partesDoCorpo" (cdkDropListDropped)="drop($event)">
-            <img *ngFor="let parte of partesDoCorpo" [cdkDragDisabled]="acertouTudo" cdkDrag [src]="parte.imagem" class="icons">
+            <img *ngFor="let parte of partesDoCorpo" [cdkDragDisabled]="acertouTudo" cdkDrag [src]="parte.imagem" class="icons" (mouseenter)="lerTexto(parte.nome)" (mouseleave)="parar()">
           </div>
         </div>
     </div>
