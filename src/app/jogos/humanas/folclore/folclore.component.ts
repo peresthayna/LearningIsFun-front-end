@@ -5,6 +5,7 @@ import { InternacionalizacaoService } from '../../../main/internacionalizacao/in
 import { JogoService } from '../../linguagens/shared/service/jogo.service';
 import { ReacoesService } from '../../../componentes/shared/services/reacoes.service';
 import { Resposta } from '../../linguagens/shared/model/resposta.model';
+import { TextToSpeechService } from '../../../componentes/shared/services/text-to-speech.service';
 
 @Component({
   selector: 'app-folclore',
@@ -20,11 +21,14 @@ export class FolcloreComponent {
   constructor(
     private embaralhaListaService: EmbaralharListaService,
     private interService: InternacionalizacaoService,
-    private jogoService: JogoService) { }
+    private jogoService: JogoService,
+    private ttsService: TextToSpeechService
+  ) { }
 
   ngOnInit() {
-    this.getPalavras();
     this.literals = this.interService.getIdioma();
+    this.getPalavras();
+    this.lerTexto(this.literals.jogoFolcloreDescricao + '. ' + this.literals.jogoFolcloreDica);
   }
 
   public getPalavras(): void {
@@ -102,5 +106,21 @@ export class FolcloreComponent {
       ReacoesService.mudarReacao.emit('acertou tudo');
       this.jogoService.adicionarNivel();
     }
+  }
+
+  public lerTexto(texto: string): void {
+    this.ttsService.pararLeitura();
+    setTimeout(() => {
+      this.ttsService.lerTexto(texto);
+    }, 200);
+  }
+
+  public parar(): void {
+    this.ttsService.pararLeitura();
+  }
+
+  public lerUndescore(texto: string): void {
+    texto = texto.replace(/_/g, "");
+    this.lerTexto(texto);
   }
 }
