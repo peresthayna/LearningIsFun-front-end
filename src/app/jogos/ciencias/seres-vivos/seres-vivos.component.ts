@@ -5,6 +5,7 @@ import { InternacionalizacaoService } from '../../../main/internacionalizacao/in
 import { JogoService } from '../../linguagens/shared/service/jogo.service';
 import { ReacoesService } from '../../../componentes/shared/services/reacoes.service';
 import { Resposta } from '../shared/model/resposta.model';
+import { TextToSpeechService } from '../../../componentes/shared/services/text-to-speech.service';
 
 @Component({
   selector: 'app-seres-vivos',
@@ -20,12 +21,14 @@ export class SeresVivosComponent {
   constructor(
     private embaralhaListaService: EmbaralharListaService,
     private interService: InternacionalizacaoService,
-    private jogoService: JogoService
+    private jogoService: JogoService,
+    private ttsService: TextToSpeechService
   ) { }
 
   ngOnInit() {
     this.literals = this.interService.getIdioma();
     this.getPalavras();
+    this.lerTexto(this.literals.jogoSeresVivosDescricao + '. ' + this.literals.jogoSeresVivosDica);
   }
 
   public getPalavras(): void {
@@ -103,5 +106,21 @@ export class SeresVivosComponent {
       ReacoesService.mudarReacao.emit('acertou tudo');
       this.jogoService.adicionarNivel();
     }
+  }
+
+  public lerTexto(texto: string): void {
+    this.ttsService.pararLeitura();
+    setTimeout(() => {
+      this.ttsService.lerTexto(texto);
+    }, 200);
+  }
+
+  public lerUndescore(texto: string): void {
+    texto = texto.replace(/_/g, "");
+    this.lerTexto(texto);
+  }
+
+  public parar(): void {
+    this.ttsService.pararLeitura();
   }
 }

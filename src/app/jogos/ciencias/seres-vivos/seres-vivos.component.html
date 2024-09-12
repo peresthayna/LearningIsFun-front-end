@@ -2,6 +2,7 @@
 <app-perfil></app-perfil>
 <app-reacoes></app-reacoes>
 <app-reload></app-reload>
+<app-sound></app-sound>
 <div class="container-fluid">
   <div class="text-center mt-3" style="color: #FFFFFF;">
     <h2>{{ literals.jogoSeresVivosDescricao }}</h2>
@@ -10,13 +11,13 @@
   <div class="row" *ngIf="palavras">
     <div class="col-3 p-2" *ngFor="let palavra of palavras">
       <div class="card text-center">
-        <img [src]="palavra.imagem"  class="card-img-top">
+        <img [src]="palavra.imagem"  class="card-img-top" (mouseenter)="lerUndescore(palavra.palavra)" (mouseleave)="parar()">
         <div class="card-body">
           <div class="palavra text-center">
             <h5>{{ palavra.palavra }}</h5>
           </div>
           <ul class="list-group list-group-horizontal text-center">
-            <button class="btn-heart" *ngFor="let resposta of palavra.respostas" [disabled]="resposta.isBloqueado" (click)="verificarResposta(palavra, resposta)">
+            <button class="btn-heart" *ngFor="let resposta of palavra.respostas" [disabled]="resposta.isBloqueado" (click)="verificarResposta(palavra, resposta)" (mouseenter)="lerTexto(resposta.resposta)" (mouseleave)="parar()">
             <li class="list-group-item" [ngStyle]="{'background-color': resposta.cor}">{{resposta.resposta}}</li></button>
           </ul>
         </div>
