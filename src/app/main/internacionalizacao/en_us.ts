@@ -223,4 +223,13 @@ export const en_us = {
   galochas: 'galoshes',
   guardaChuva: 'umbrella',
   oculosSol: 'sunglasses',
+  //veiculos
+  carro: 'car',
+  trem: 'train',
+  barco: 'boat',
+  aviao: 'airplane',
+  mar: 'sea',
+  ceu: 'sky',
+  estrada: 'road',
+  trilhos: 'rails',
 }

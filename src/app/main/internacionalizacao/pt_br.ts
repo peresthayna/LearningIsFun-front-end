@@ -224,4 +224,15 @@ export const pt_br = {
   galochas: 'galochas',
   guardaChuva: 'guarda chuva',
   oculosSol: 'óculos de sol',
+  //veiculos
+  carro: 'carro',
+  trem: 'trem',
+  barco: 'barco',
+  aviao: 'avião',
+  mar: 'mar',
+  ceu: 'céu',
+  estrada: 'estrada',
+  trilhos: 'trilhos',
+
+
 }

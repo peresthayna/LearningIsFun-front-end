@@ -223,4 +223,13 @@ export const es_es = {
   galochas: 'chanclos',
   guardaChuva: 'paraguas',
   oculosSol: 'gafas de sol',
+  //veiculos
+  carro: 'coche',
+  trem: 'tren',
+  barco: 'barco',
+  aviao: 'avión',
+  mar: 'mar',
+  ceu: 'cielo',
+  estrada: 'camino',
+  trilhos: 'rieles',
 }
