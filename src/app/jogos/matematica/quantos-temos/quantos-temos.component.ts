@@ -3,6 +3,8 @@ import { ParteDoCorpo } from '../shared/model/parte-do-corpo.model';
 import { InternacionalizacaoService } from '../../../main/internacionalizacao/internacionalizacao.service';
 import { JogoService } from '../../linguagens/shared/service/jogo.service';
 import { ReacoesService } from '../../../componentes/shared/services/reacoes.service';
+import { TextToSpeechService } from '../../../componentes/shared/services/text-to-speech.service';
+import { ParteDoCorpoNome } from '../shared/model/parte-do-corpo-nome';
 
 @Component({
   selector: 'app-quantos-temos',
@@ -10,14 +12,7 @@ import { ReacoesService } from '../../../componentes/shared/services/reacoes.ser
   styleUrls: ['./quantos-temos.component.css','../shared/style.css']
 })
 export class QuantosTemosComponent {
-  public partesDoCorpo: ParteDoCorpo[] = [
-    { id: 0, imagem: '../../assets/matematica/quantos-temos/olho.png', quantidade: 2, checkbox: [false, false] },
-    { id: 1, imagem: '../../assets/matematica/quantos-temos/mão.png', quantidade: 2, checkbox: [false, false] },
-    { id: 2, imagem: '../../assets/matematica/quantos-temos/boca.png', quantidade: 1, checkbox: [false, false] },
-    { id: 3, imagem: '../../assets/matematica/quantos-temos/pé.png', quantidade: 2, checkbox: [false, false] },
-    { id: 4, imagem: '../../assets/matematica/quantos-temos/orelha.png', quantidade: 2, checkbox: [false, false] },
-    { id: 5, imagem: '../../assets/matematica/quantos-temos/nariz.png', quantidade: 1, checkbox: [false, false] }
-  ];
+  public partesDoCorpo: ParteDoCorpoNome[] = [];
   public acertou: boolean[] = [false, false, false, false, false, false];
   public acertouTudo: boolean = false;
   public auxiliar: boolean;
@@ -25,14 +20,28 @@ export class QuantosTemosComponent {
 
   constructor(
     private interService: InternacionalizacaoService,
-    private jogoService: JogoService
+    private jogoService: JogoService,
+    private ttsService: TextToSpeechService
   ) { }
 
   ngOnInit() {
     this.literals = this.interService.getIdioma();
+    this.generateItems();
+    this.lerTexto(this.literals.jogoQuantidadesDescricao + '. ' + this.literals.jogoQuantidadesDica);
   }
 
-  public mudouValor(parte: ParteDoCorpo) {
+  public generateItems(): void {
+    this.partesDoCorpo = [
+      { id: 0, imagem: '../../assets/matematica/quantos-temos/olho.png', quantidade: 2, checkbox: [false, false], nome: this.literals.olhos },
+      { id: 1, imagem: '../../assets/matematica/quantos-temos/mão.png', quantidade: 2, checkbox: [false, false], nome: this.literals.maos },
+      { id: 2, imagem: '../../assets/matematica/quantos-temos/boca.png', quantidade: 1, checkbox: [false, false], nome: this.literals.boca },
+      { id: 3, imagem: '../../assets/matematica/quantos-temos/pé.png', quantidade: 2, checkbox: [false, false], nome: this.literals.pes },
+      { id: 4, imagem: '../../assets/matematica/quantos-temos/orelha.png', quantidade: 2, checkbox: [false, false], nome: this.literals.orelhas },
+      { id: 5, imagem: '../../assets/matematica/quantos-temos/nariz.png', quantidade: 1, checkbox: [false, false], nome: this.literals.nariz }
+    ];
+  }
+
+  public mudouValor(parte: ParteDoCorpoNome) {
     if(parte.id == 0 || parte.id == 1 || parte.id == 3 || parte.id == 4) {
       parte.checkbox[0] && parte.checkbox[1] ? this.auxiliar = true : this.auxiliar = false;
       if(this.auxiliar) {
@@ -63,5 +72,16 @@ export class QuantosTemosComponent {
       ReacoesService.mudarReacao.emit('acertou tudo');
       this.jogoService.adicionarNivel();
     }
+  }
+
+  public lerTexto(texto: string): void {
+    this.ttsService.pararLeitura();
+    setTimeout(() => {
+      this.ttsService.lerTexto(texto);
+    }, 200);
+  }
+
+  public parar(): void {
+    this.ttsService.pararLeitura();
   }
 }

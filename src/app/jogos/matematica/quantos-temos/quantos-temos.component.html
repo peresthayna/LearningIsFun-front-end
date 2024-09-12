@@ -2,6 +2,7 @@
 <app-perfil></app-perfil>
 <app-reacoes></app-reacoes>
 <app-reload></app-reload>
+<app-sound></app-sound>
 <div class="container-fluid">
   <div class="text-center mt-3" style="color: #FFFFFF;">
     <h2>{{ literals.jogoQuantidadesDescricao }}</h2>
@@ -10,7 +11,7 @@
   <div class="container">
     <div class="row mt-5">
       <div class="box col-6 mt-3" *ngFor="let parte of partesDoCorpo">
-        <img [src]="parte.imagem">
+        <img [src]="parte.imagem" (mouseenter)="lerTexto(parte.nome)" (mouseleave)="parar()">
         <input type="checkbox" [(ngModel)]="parte.checkbox[0]" class="checkbox" (change)="mudouValor(parte)">
         <input type="checkbox" [(ngModel)]="parte.checkbox[1]" class="checkbox" (change)="mudouValor(parte)">
       </div>
