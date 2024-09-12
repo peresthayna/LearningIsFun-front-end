@@ -233,6 +233,14 @@ export const pt_br = {
   ceu: 'céu',
   estrada: 'estrada',
   trilhos: 'trilhos',
-
+  //cores frutas
+  amarelo: 'amarelo',
+  verde: 'verde',
+  vermelho: 'vermelho',
+  roxo: 'roxo',
+  banana: 'banana',
+  morango: 'morango',
+  uva: 'uva',
+  pera: 'pêra',
 
 }

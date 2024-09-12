@@ -232,4 +232,13 @@ export const es_es = {
   ceu: 'cielo',
   estrada: 'camino',
   trilhos: 'rieles',
+  //cores frutas
+  amarelo: 'amarillo',
+  verde: 'verde',
+  vermelho: 'rojo',
+  roxo: 'púrpura',
+  banana: 'plátano',
+  morango: 'fresa',
+  uva: 'uva',
+  pera: 'pera',
 }
