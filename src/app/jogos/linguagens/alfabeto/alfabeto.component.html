@@ -12,7 +12,7 @@
     <div class="col-6 text-center tree">
       <div *ngFor="let letra of alfabeto" [ngStyle]="{'margin-top':letra.posicaoY, 'margin-left':letra.posicaoX}" class="alphabet">
         <div class="drop" cdkDropList [cdkDropListData]="letra.listaObjetos" (cdkDropListDropped)="drop($event, letra)">
-          <h5 class="mt-2" *ngIf="letra.listaObjetos.length===0">{{ letra.letra  }}</h5>
+          <h5 class="mt-1" *ngIf="letra.listaObjetos.length===0">{{ letra.letra  }}</h5>
           <img *ngFor="let objeto of letra.listaObjetos" [cdkDragDisabled]="acertouTudo" cdkDrag [src]="objeto.imagem" class="maca-drop">
         </div>
       </div>
@@ -20,7 +20,7 @@
     <div class="col-6">
       <div class="text-center">
         <div class="puzzle-list mt-5 macas-img" cdkDropList [cdkDropListData]="macas">
-          <img *ngFor="let maca of macas" [cdkDragDisabled]="acertouTudo" cdkDrag [src]="maca.imagem" class="icons">
+          <img *ngFor="let maca of macas" [cdkDragDisabled]="acertouTudo" cdkDrag [src]="maca.imagem" class="icons" (mouseenter)="lerTexto(maca.letra)" (mouseleave)="parar()">
         </div>
       </div>
     </div>

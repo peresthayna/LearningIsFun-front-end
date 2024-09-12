@@ -6,6 +6,7 @@ import { EmbaralharListaService } from '../shared/service/embaralha-lista.servic
 import { JogoService } from '../shared/service/jogo.service';
 import { InternacionalizacaoService } from '../../../main/internacionalizacao/internacionalizacao.service';
 import { ReacoesService } from '../../../componentes/shared/services/reacoes.service';
+import { TextToSpeechService } from '../../../componentes/shared/services/text-to-speech.service';
 
 @Component({
   selector: 'app-alfabeto',
@@ -27,13 +28,15 @@ export class AlfabetoComponent implements OnInit {
 
   constructor(private embaralharListaService: EmbaralharListaService,
     private interService: InternacionalizacaoService,
-    private jogoService: JogoService) {
-    }
+    private jogoService: JogoService,
+    private ttsService: TextToSpeechService
+  ) { }
 
   ngOnInit() {
+    this.literals = this.interService.getIdioma();
     this.macas = this.getMacas(this.lista);
     this.alfabeto = this.getLetras(this.lista);
-    this.literals = this.interService.getIdioma();
+    this.lerTexto(this.literals.jogoAlfabetoDescricao + '. ' + this.literals.jogoAlfabetoDica);
   }
 
   public getLetras(lista: string[]): DropItem[] {
@@ -92,6 +95,17 @@ export class AlfabetoComponent implements OnInit {
       ReacoesService.mudarReacao.emit('acertou tudo');
       this.jogoService.adicionarNivel();
     }
+  }
+
+  public lerTexto(texto: string): void {
+    this.ttsService.pararLeitura();
+    setTimeout(() => {
+      this.ttsService.lerTexto(texto);
+    }, 200);
+  }
+
+  public parar(): void {
+    this.ttsService.pararLeitura();
   }
 
 }
