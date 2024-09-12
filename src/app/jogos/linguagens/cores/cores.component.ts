@@ -3,9 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { Resposta } from '../shared/model/resposta.model';
 import { EmbaralharListaService } from '../shared/service/embaralha-lista.service';
 import { JogoService } from '../shared/service/jogo.service';
-import { UsuarioConsulta } from '../../../main/usuario/shared/model/usuario-consulta.dto.model';
 import { InternacionalizacaoService } from '../../../main/internacionalizacao/internacionalizacao.service';
 import { ReacoesService } from '../../../componentes/shared/services/reacoes.service';
+import { TextToSpeechService } from '../../../componentes/shared/services/text-to-speech.service';
 
 @Component({
   selector: 'app-cores',
@@ -17,26 +17,23 @@ export class CoresComponent implements OnInit {
   public palavras: Palavra[] = [];
   public alfabeto: string[] = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
   public acertouTudo: boolean = false;
-  public ativarLeoCurioso: boolean = true;
-  public ativarLeoFeliz: boolean = false;
-  public ativarLeoTriste: boolean = false;
-  public ativarLeoOk: boolean = false;
   public literals: any;
-  public recarregarPerfil: boolean = false;
 
   constructor(
     private embaralhaListaService: EmbaralharListaService,
     private interService: InternacionalizacaoService,
     private jogoService: JogoService,
+    private ttsService: TextToSpeechService
   ) { }
 
   ngOnInit() {
     this.literals = this.interService.getIdioma();
     this.getPalavras();
+    this.ttsService.lerTexto(this.literals.jogoCoresDescricao + '. ' + this.literals.jogoCoresDica);
   }
 
   public getPalavras(): void {
-    this.ativarLeoCurioso = true;
+    ReacoesService.mudarReacao.emit('curiosa');
     this.palavras[0] = new Palavra(); this.palavras[0].palavra = this.literals.palavraVermelho; this.palavras[0].respostaCerta = this.literals.respostaVermelho;
     this.palavras[1] = new Palavra(); this.palavras[1].palavra = this.literals.palavraVerde; this.palavras[1].respostaCerta = this.literals.respostaVerde;
     this.palavras[2] = new Palavra(); this.palavras[2].palavra = this.literals.palavraAzul; this.palavras[2].respostaCerta = this.literals.respostaAzul;
@@ -87,17 +84,14 @@ export class CoresComponent implements OnInit {
       for(let i = 0; i < 3; i++) {
         palavra.respostas[i].isBloqueado = true;
       }
-      this.ativarLeoCurioso = false;
-      this.ativarLeoFeliz = true;
-      this.ativarLeoTriste = false;
-      this.adicionarPontos();
+      this.jogoService.adicionarPontos();
+      ReacoesService.mudarReacao.emit('acertou');
     }
     else {
-      this.tirarPontos();
       resposta.cor = '#ff0000';
       resposta.isBloqueado = true;
-      this.ativarLeoFeliz = false;
-      this.ativarLeoTriste = true;
+      this.jogoService.tirarPontos();
+      ReacoesService.mudarReacao.emit('triste');
     }
     this.verificarAcertouTudo();
   }
@@ -110,26 +104,25 @@ export class CoresComponent implements OnInit {
       }
     }
     if(this.acertouTudo) {
-      this.ativarLeoFeliz = false;
-      this.ativarLeoTriste = false;
-      this.ativarLeoOk = true;
-      this.adicionarNivel();
+      this.jogoService.adicionarNivel();
+      ReacoesService.mudarReacao.emit('acertou tudo');
     }
   }
 
-  public adicionarPontos(): void {
-    this.jogoService.adicionarPontos();
-    ReacoesService.mudarReacao.emit('acertou');
+  public lerTexto(texto: string): void {
+    this.ttsService.pararLeitura();
+    setTimeout(() => {
+      this.ttsService.lerTexto(texto);
+    }, 200);
   }
 
-  public adicionarNivel(): void {
-    this.jogoService.adicionarNivel();
-    ReacoesService.mudarReacao.emit('acertou tudo');
+  public lerUndescore(texto: string): void {
+    texto = texto.replace(/_/g, "");
+    this.lerTexto(texto);
   }
 
-  public tirarPontos(): void {
-    this.jogoService.tirarPontos();
-    ReacoesService.mudarReacao.emit('triste');
+  public parar(): void {
+    this.ttsService.pararLeitura();
   }
 
 }
