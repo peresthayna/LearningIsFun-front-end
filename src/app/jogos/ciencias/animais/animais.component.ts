@@ -6,6 +6,9 @@ import { EmbaralharListaService } from '../../linguagens/shared/service/embaralh
 import { JogoService } from '../../linguagens/shared/service/jogo.service';
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ReacoesService } from '../../../componentes/shared/services/reacoes.service';
+import { PuzzleNome } from '../../linguagens/shared/model/puzzle-nome';
+import { DropNome } from '../../linguagens/shared/model/drop-nome';
+import { TextToSpeechService } from '../../../componentes/shared/services/text-to-speech.service';
 
 @Component({
   selector: 'app-animais',
@@ -14,13 +17,8 @@ import { ReacoesService } from '../../../componentes/shared/services/reacoes.ser
 })
 export class AnimaisComponent {
   public literals: any;
-  public formas: Puzzle[] = [
-    { imagem: '../../../assets/ciencias/animais/filhote.png', posicaoCorreta: 0 },
-    { imagem: '../../../assets/ciencias/animais/passarinho.png', posicaoCorreta: 1 },
-    { imagem: '../../../assets/ciencias/animais/leaozinho.png', posicaoCorreta: 2 },
-    { imagem: '../../../assets/ciencias/animais/ursinho.png', posicaoCorreta: 3 }
-  ];
-  public listaDrop: Drop[] = [];
+  public formas: PuzzleNome[] = [];
+  public listaDrop: DropNome[] = [];
   public x: string[] = ['-110px','40px','190px','340px'];
   public y: string = '50px';
   public acertou: boolean[] = [false, false, false, false];
@@ -29,25 +27,33 @@ export class AnimaisComponent {
   constructor(
     private interService: InternacionalizacaoService,
     private embaralharListaService: EmbaralharListaService,
-    private jogoService: JogoService
+    private jogoService: JogoService,
+    private ttsService: TextToSpeechService
   ) { }
 
   ngOnInit() {
     this.literals = this.interService.getIdioma();
     this.carregarDrops();
+    this.lerTexto(this.literals.jogoFilhotesDescricao + '. ' + this.literals.jogoFilhotesDica);
   }
 
   public carregarDrops() {
+    this.formas = [
+      { imagem: '../../../assets/ciencias/animais/filhote.png', posicaoCorreta: 0, nome: this.literals.cachorrinho },
+      { imagem: '../../../assets/ciencias/animais/passarinho.png', posicaoCorreta: 1, nome: this.literals.pintinho },
+      { imagem: '../../../assets/ciencias/animais/leaozinho.png', posicaoCorreta: 2, nome: this.literals.leaozinho },
+      { imagem: '../../../assets/ciencias/animais/ursinho.png', posicaoCorreta: 3, nome: this.literals.ursinho }
+    ];
     this.embaralharListaService.embaralhaLista(this.formas);
     this.listaDrop = [
-      { posicao: 0, posicaoX: this.x[0], posicaoY: this.y, puzzleList: []},
-      { posicao: 1, posicaoX: this.x[1], posicaoY: this.y, puzzleList: []},
-      { posicao: 2, posicaoX: this.x[2], posicaoY: this.y, puzzleList: []},
-      { posicao: 3, posicaoX: this.x[3], posicaoY: this.y, puzzleList: []}
+      { posicao: 0, posicaoX: this.x[0], posicaoY: this.y, puzzleList: [], nome: this.literals.cachorro },
+      { posicao: 1, posicaoX: this.x[1], posicaoY: this.y, puzzleList: [], nome: this.literals.galo },
+      { posicao: 2, posicaoX: this.x[2], posicaoY: this.y, puzzleList: [], nome: this.literals.leao },
+      { posicao: 3, posicaoX: this.x[3], posicaoY: this.y, puzzleList: [], nome: this.literals.urso }
     ];
   }
 
-  public drop(event: CdkDragDrop<Puzzle[]>) {
+  public drop(event: CdkDragDrop<PuzzleNome[]>) {
     transferArrayItem(
       event.previousContainer.data,
       event.container.data,
@@ -56,7 +62,7 @@ export class AnimaisComponent {
     );
   }
 
-  public dropResposta(event: CdkDragDrop<Puzzle[]>, drop: Drop) {
+  public dropResposta(event: CdkDragDrop<PuzzleNome[]>, drop: DropNome) {
     if(drop.puzzleList.length > 0) {
       return;
     }
@@ -69,7 +75,7 @@ export class AnimaisComponent {
     this.verificaRespostas(drop);
   }
 
-  public verificaRespostas(drop: Drop): void {
+  public verificaRespostas(drop: DropNome): void {
     if(drop.puzzleList[0].posicaoCorreta == drop.posicao) {
       this.acertou[drop.posicao] = true;
       ReacoesService.mudarReacao.emit('acertou');
@@ -84,5 +90,16 @@ export class AnimaisComponent {
       ReacoesService.mudarReacao.emit('acertou tudo');
       this.jogoService.adicionarNivel();
     }
+  }
+
+  public lerTexto(texto: string): void {
+    this.ttsService.pararLeitura();
+    setTimeout(() => {
+      this.ttsService.lerTexto(texto);
+    }, 200);
+  }
+
+  public parar(): void {
+    this.ttsService.pararLeitura();
   }
 }
