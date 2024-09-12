@@ -5,6 +5,7 @@ import { EmbaralharListaService } from '../shared/service/embaralha-lista.servic
 import { JogoService } from '../shared/service/jogo.service';
 import { InternacionalizacaoService } from '../../../main/internacionalizacao/internacionalizacao.service';
 import { ReacoesService } from '../../../componentes/shared/services/reacoes.service';
+import { TextToSpeechService } from '../../../componentes/shared/services/text-to-speech.service';
 
 @Component({
   selector: 'app-iniciais',
@@ -21,12 +22,14 @@ export class IniciaisComponent implements OnInit {
   constructor(
     private embaralhaListaService: EmbaralharListaService,
     private interService: InternacionalizacaoService,
-    private jogoService: JogoService
+    private jogoService: JogoService,
+    private ttsService: TextToSpeechService
   ) { }
 
   ngOnInit() {
     this.literals = this.interService.getIdioma();
     this.getPalavras();
+    this.lerTexto(this.literals.jogoIniciaisDescricao + '. ' + this.literals.jogoIniciaisDica);
   }
 
   public getPalavras(): void {
@@ -106,5 +109,20 @@ export class IniciaisComponent implements OnInit {
     }
   }
 
+  public lerTexto(texto: string): void {
+    this.ttsService.pararLeitura();
+    setTimeout(() => {
+      this.ttsService.lerTexto(texto);
+    }, 200);
+  }
+
+  public parar(): void {
+    this.ttsService.pararLeitura();
+  }
+
+  public lerUndescore(texto: string): void {
+    texto = texto.replace(/_/g, "");
+    this.lerTexto(texto);
+  }
 
 }
