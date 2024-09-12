@@ -7,6 +7,10 @@ import { ReacoesService } from '../../../componentes/shared/services/reacoes.ser
 import { Drop } from '../../linguagens/shared/model/drop.model';
 import { PuzzleDuasRespostas } from '../../linguagens/shared/model/puzzle-duas-respostas.model';
 import { DropDuasRespostas } from '../../linguagens/shared/model/drop-duas-respostas.model';
+import { TextToSpeechService } from '../../../componentes/shared/services/text-to-speech.service';
+import { PuzzleNomeDuasRespostas } from '../../linguagens/shared/model/puzzle-nome-duas-respostas';
+import { DropNome } from '../../linguagens/shared/model/drop-nome';
+import { DropNomeDuasRespostas } from '../../linguagens/shared/model/drop-nome-duas-respostas';
 
 @Component({
   selector: 'app-formas',
@@ -15,15 +19,8 @@ import { DropDuasRespostas } from '../../linguagens/shared/model/drop-duas-respo
 })
 export class FormasComponent {
   public literals: any;
-  public formas: PuzzleDuasRespostas[] = [
-    { imagem: '../../../assets/matematica/quantidade-formas/1.jpg', posicaoCorreta: [0, 3] },
-    { imagem: '../../../assets/matematica/quantidade-formas/2.jpg', posicaoCorreta: [2, 5] },
-    { imagem: '../../../assets/matematica/quantidade-formas/3.jpg', posicaoCorreta: [1, 4] },
-    { imagem: '../../../assets/matematica/quantidade-formas/4.jpg', posicaoCorreta: [2, 5] },
-    { imagem: '../../../assets/matematica/quantidade-formas/5.jpg', posicaoCorreta: [1, 4] },
-    { imagem: '../../../assets/matematica/quantidade-formas/6.jpg', posicaoCorreta: [0, 3] }
-  ];
-  public listaDrop: Drop[] = [];
+  public formas: PuzzleNomeDuasRespostas[] = [];
+  public listaDrop: DropNomeDuasRespostas[] = [];
   public x: string[] = ['-30px','243px'];
   public y: string[] = ['-2px','119px','235px'];
   public acertou: boolean[] = [false, false, false, false, false, false];
@@ -32,27 +29,37 @@ export class FormasComponent {
   constructor(
     private interService: InternacionalizacaoService,
     private embaralharListaService: EmbaralharListaService,
-    private jogoService: JogoService
+    private jogoService: JogoService,
+    private ttsService: TextToSpeechService
   ) { }
 
   ngOnInit() {
     this.literals = this.interService.getIdioma();
     this.carregarDrops();
+    this.lerTexto(this.literals.jogoQtdeFormasDescricao + '. ' + this.literals.jogoQtdeFormasDica);
   }
 
   public carregarDrops() {
+    this.formas = [
+      { imagem: '../../../assets/matematica/quantidade-formas/1.jpg', posicaoCorreta: [0, 3], nome: this.literals.umCoracao },
+      { imagem: '../../../assets/matematica/quantidade-formas/2.jpg', posicaoCorreta: [2, 5], nome: this.literals.doisQuadrados },
+      { imagem: '../../../assets/matematica/quantidade-formas/3.jpg', posicaoCorreta: [1, 4], nome: this.literals.tresEstrelas },
+      { imagem: '../../../assets/matematica/quantidade-formas/4.jpg', posicaoCorreta: [2, 5], nome: this.literals.doisCirculos },
+      { imagem: '../../../assets/matematica/quantidade-formas/5.jpg', posicaoCorreta: [1, 4], nome: this.literals.tresTriangulos },
+      { imagem: '../../../assets/matematica/quantidade-formas/6.jpg', posicaoCorreta: [0, 3], nome: this.literals.umCirculo }
+    ];
     this.embaralharListaService.embaralhaLista(this.formas);
     this.listaDrop = [
-      { posicao: 0, posicaoX: this.x[0], posicaoY: this.y[0], puzzleList: []},
-      { posicao: 1, posicaoX: this.x[1], posicaoY: this.y[0], puzzleList: []},
-      { posicao: 2, posicaoX: this.x[0], posicaoY: this.y[1], puzzleList: []},
-      { posicao: 3, posicaoX: this.x[1], posicaoY: this.y[1], puzzleList: []},
-      { posicao: 4, posicaoX: this.x[0], posicaoY: this.y[2], puzzleList: []},
-      { posicao: 5, posicaoX: this.x[1], posicaoY: this.y[2], puzzleList: []}
+      { posicao: 0, posicaoX: this.x[0], posicaoY: this.y[0], puzzleList: [], nome: '1'},
+      { posicao: 1, posicaoX: this.x[1], posicaoY: this.y[0], puzzleList: [], nome: '3' },
+      { posicao: 2, posicaoX: this.x[0], posicaoY: this.y[1], puzzleList: [], nome: '2' },
+      { posicao: 3, posicaoX: this.x[1], posicaoY: this.y[1], puzzleList: [], nome: '1' },
+      { posicao: 4, posicaoX: this.x[0], posicaoY: this.y[2], puzzleList: [], nome: '3' },
+      { posicao: 5, posicaoX: this.x[1], posicaoY: this.y[2], puzzleList: [], nome: '2' }
     ];
   }
 
-  public drop(event: CdkDragDrop<PuzzleDuasRespostas[]>) {
+  public drop(event: CdkDragDrop<PuzzleNomeDuasRespostas[]>) {
     transferArrayItem(
       event.previousContainer.data,
       event.container.data,
@@ -74,7 +81,7 @@ export class FormasComponent {
     this.verificaRespostas(drop);
   }
 
-  public verificaRespostas(drop: DropDuasRespostas): void {
+  public verificaRespostas(drop: DropNomeDuasRespostas): void {
     if(drop.puzzleList[0].posicaoCorreta.includes(drop.posicao)) {
       this.acertou[drop.posicao] = true;
       ReacoesService.mudarReacao.emit('acertou');
@@ -89,5 +96,16 @@ export class FormasComponent {
       ReacoesService.mudarReacao.emit('acertou tudo');
       this.jogoService.adicionarNivel();
     }
+  }
+
+  public lerTexto(texto: string): void {
+    this.ttsService.pararLeitura();
+    setTimeout(() => {
+      this.ttsService.lerTexto(texto);
+    }, 200);
+  }
+
+  public parar(): void {
+    this.ttsService.pararLeitura();
   }
 }
