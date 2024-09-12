@@ -246,4 +246,10 @@ export const es_es = {
   circulo: 'círculo',
   retangulo: 'rectángulo',
   triangulo: 'triángulo',
+  umCoracao: 'un corazón',
+  doisQuadrados: 'dos ​​cuadrados',
+  tresEstrelas: 'tres estrellas',
+  doisCirculos: 'dos ​​círculos',
+  tresTriangulos: 'tres triángulos',
+  umCirculo: 'un círculo'
 }

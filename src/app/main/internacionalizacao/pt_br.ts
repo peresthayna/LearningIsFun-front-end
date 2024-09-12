@@ -247,5 +247,11 @@ export const pt_br = {
   circulo: 'círculo',
   retangulo: 'retângulo',
   triangulo: 'triângulo',
+  umCoracao: 'um coração',
+  doisQuadrados: 'dois quadrados',
+  tresEstrelas: 'três estrelas',
+  doisCirculos: 'dois círculos',
+  tresTriangulos: 'três triângulos',
+  umCirculo: 'um círculo'
 
 }
