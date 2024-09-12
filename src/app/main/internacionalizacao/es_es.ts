@@ -210,6 +210,17 @@ export const es_es = {
   boca: 'boca',
   braco: 'brazo',
   joelho: 'rodilla',
-  perna: 'pierna'
-
+  perna: 'pierna',
+  //clima
+  sol: 'clima soleado',
+  chuva: 'tiempo lluvioso',
+  objetos: 'objetos',
+  biquini: 'bikini',
+  bone: 'gorra',
+  capaChuva: 'impermeable',
+  casaco: 'abrigo',
+  chinelo: 'zapatillas',
+  galochas: 'chanclos',
+  guardaChuva: 'paraguas',
+  oculosSol: 'gafas de sol',
 }

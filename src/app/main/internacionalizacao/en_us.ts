@@ -210,5 +210,17 @@ export const en_us = {
   boca: 'mouth',
   braco: 'arm',
   joelho: 'knee',
-  perna: 'leg'
+  perna: 'leg',
+  //clima
+  sol: 'sunny weather',
+  chuva: 'rainy weather',
+  objetos: 'objects',
+  biquini: 'bikini',
+  bone: 'cap',
+  capaChuva: 'raincoat',
+  casaco: 'coat',
+  chinelo: 'flip-flops',
+  galochas: 'galoshes',
+  guardaChuva: 'umbrella',
+  oculosSol: 'sunglasses',
 }
