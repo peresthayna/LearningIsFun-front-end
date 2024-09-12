@@ -11,10 +11,10 @@
   <div class="row" cdkDropListGroup>
     <div class="col-md-4 text-center" *ngFor="let coluna of colunas">
       <div class="block">
-        <div  *ngIf="coluna.img != ''"><img [src]="coluna.img" class="clima-img"></div>
+        <div  *ngIf="coluna.img != ''"><img [src]="coluna.img" class="clima-img" (mouseenter)="lerTexto(coluna.literals)" (mouseleave)="parar()"></div>
         <div  *ngIf="coluna.img == ''" class="p40"></div>
         <div class="container-fluid" #dropList cdkDropList [cdkDropListData]="coluna.puzzleItems" (cdkDropListDropped)="drop($event, coluna)">
-          <img width="100px" height="100px" *ngFor="let puzzle of coluna.puzzleItems" [cdkDragDisabled]="false" cdkDrag [src]="puzzle.imagem" class="icons">
+          <img width="100px" height="100px" *ngFor="let puzzle of coluna.puzzleItems" [cdkDragDisabled]="false" cdkDrag [src]="puzzle.imagem" class="icons" (mouseenter)="lerTexto(puzzle.nome)" (mouseleave)="parar()">
         </div>
       </div>
     </div>
