@@ -5,6 +5,7 @@ import { EmbaralharListaService } from '../../linguagens/shared/service/embaralh
 import { InternacionalizacaoService } from '../../../main/internacionalizacao/internacionalizacao.service';
 import { ReacoesService } from '../../../componentes/shared/services/reacoes.service';
 import { JogoService } from '../../linguagens/shared/service/jogo.service';
+import { TextToSpeechService } from '../../../componentes/shared/services/text-to-speech.service';
 
 @Component({
   selector: 'app-coracoes',
@@ -21,12 +22,14 @@ export class CoracoesComponent implements OnInit {
   constructor(
     private embaralhaListaService: EmbaralharListaService,
     private interService: InternacionalizacaoService,
-    private jogoService: JogoService
+    private jogoService: JogoService,
+    private ttsService: TextToSpeechService
   ) { }
 
   ngOnInit() {
-    this.getCoracoes();
     this.literals = this.interService.getIdioma();
+    this.getCoracoes();
+    this.lerTexto(this.literals.jogoCoracoesDescricao + '. ' + this.literals.jogoCoracoesDica);
   }
 
   public getCoracoes(): void {
@@ -91,6 +94,17 @@ export class CoracoesComponent implements OnInit {
       ReacoesService.mudarReacao.emit('acertou tudo');
       this.jogoService.adicionarNivel();
     }
+  }
+
+  public lerTexto(texto: string): void {
+    this.ttsService.pararLeitura();
+    setTimeout(() => {
+      this.ttsService.lerTexto(texto);
+    }, 200);
+  }
+
+  public parar(): void {
+    this.ttsService.pararLeitura();
   }
 
 }
