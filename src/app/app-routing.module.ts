@@ -21,13 +21,14 @@ import { FolcloreComponent } from './jogos/humanas/folclore/folclore.component';
 import { TransporteComponent } from './jogos/humanas/transporte/transporte.component';
 import { ComunicacaoComponent } from './jogos/humanas/comunicacao/comunicacao.component';
 import { ClimaComponent } from './jogos/humanas/clima/clima.component';
+import { UsuarioAutenticadoGuard } from './main/shared/guards/usuario-autenticado.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'cadastro', component: UsuarioComponent },
   { path: 'login', component: EscolherUsuarioComponent },
   { path: 'ranking', component: RankingComponent },
-  { path: 'temas/:id', component: TemasComponent },
+  { path: 'temas/:id', component: TemasComponent, canActivate: [UsuarioAutenticadoGuard] },
   //lp
   { path: 'iniciais', component: IniciaisComponent },
   { path: 'arvore', component: AlfabetoComponent },
