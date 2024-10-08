@@ -71,7 +71,7 @@ export const en_us = {
   nenhumJogadorDisponivel: "There isn't any available players! How about we make one?",
   jogosEducativos: 'Educative Games',
   bemVindo: 'Welcome',
-  botaoVoltar:'Back',
+  botaoVoltar:'Go Back',
   logoff: 'Logoff',
   nivel: 'Level',
   pontos: 'XP',

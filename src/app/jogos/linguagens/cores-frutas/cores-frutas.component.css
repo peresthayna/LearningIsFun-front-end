@@ -1,5 +1,5 @@
 .container {
-  width: 44%;
+  width: 50%;
   height: 200px;
   background-image: url('/assets/lp/frutas/bg.png');
   background-repeat: no-repeat;
@@ -18,10 +18,6 @@
   position: absolute;
 }
 
-.body {
-  margin: 50px 100px 0px 100px;
-}
-
 .drop {
   width: 90px;
   height: 84px;
@@ -33,7 +29,7 @@
   background-color: #F7F4EF;
   overflow: hidden;
   position: relative;
-  margin: 50px 0 0 410px;
+  margin: 50px 0 0 350px;
   width: 500px;
   height: 90px;
 }

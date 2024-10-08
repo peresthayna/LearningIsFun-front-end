@@ -57,7 +57,7 @@ export class TextToSpeechService {
   }
 
   public lerTexto(texto: string) {
-    if(localStorage.getItem('sound') == 'true') {
+    if(localStorage.getItem('sound') == 'true' && texto != '') {
       this.textSubject.next(texto);
     }
   }
