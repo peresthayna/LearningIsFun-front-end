@@ -161,7 +161,7 @@ export const es_es = {
   positiva5: '¡Lo estás haciendo muy bien!',
   negativa1: '¡Ups! Intentar otra vez',
   negativa2: '¿Lo intentamos de nuevo?',
-  negativa3: '¡Oh, no! No es la respuesta correcta',
+  negativa3: '¡Ay, no! No es la respuesta correcta',
   negativa4: '¡Sigue intentándolo!',
   negativa5: '¡No te desanimes, ya casi es!',
   observando1: 'Humm',
