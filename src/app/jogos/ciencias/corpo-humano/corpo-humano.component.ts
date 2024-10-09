@@ -36,7 +36,7 @@ export class CorpoHumanoComponent {
   ngOnInit() {
     this.literals = this.interService.getIdioma();
     this.carregarDrops();
-    this.lerTexto(this.literals.jogoCorpoHumanoDescricao + '. ' + this.literals.jogoCorpoHumanoDica);
+    this.ttsService.lerTexto(this.literals.jogoCorpoHumanoDescricao + '. ' + this.literals.jogoCorpoHumanoDica, true);
   }
 
   public carregarDrops() {
@@ -107,10 +107,7 @@ export class CorpoHumanoComponent {
   }
 
   public lerTexto(texto: string): void {
-    this.ttsService.pararLeitura();
-    setTimeout(() => {
-      this.ttsService.lerTexto(texto);
-    }, 200);
+    this.ttsService.lerTexto(texto);
   }
 
   public parar(): void {

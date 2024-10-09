@@ -28,7 +28,7 @@ export class SeresVivosComponent {
   ngOnInit() {
     this.literals = this.interService.getIdioma();
     this.getPalavras();
-    this.lerTexto(this.literals.jogoSeresVivosDescricao + '. ' + this.literals.jogoSeresVivosDica);
+    this.ttsService.lerTexto(this.literals.jogoSeresVivosDescricao + '. ' + this.literals.jogoSeresVivosDica, true);
   }
 
   public getPalavras(): void {
@@ -109,10 +109,7 @@ export class SeresVivosComponent {
   }
 
   public lerTexto(texto: string): void {
-    this.ttsService.pararLeitura();
-    setTimeout(() => {
-      this.ttsService.lerTexto(texto);
-    }, 200);
+    this.ttsService.lerTexto(texto);
   }
 
   public lerUndescore(texto: string): void {

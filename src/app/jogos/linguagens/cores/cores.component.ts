@@ -29,7 +29,7 @@ export class CoresComponent implements OnInit {
   ngOnInit() {
     this.literals = this.interService.getIdioma();
     this.getPalavras();
-    this.ttsService.lerTexto(this.literals.jogoCoresDescricao + '. ' + this.literals.jogoCoresDica);
+    this.ttsService.lerTexto(this.literals.jogoCoresDescricao + '. ' + this.literals.jogoCoresDica, true);
   }
 
   public getPalavras(): void {
@@ -110,10 +110,7 @@ export class CoresComponent implements OnInit {
   }
 
   public lerTexto(texto: string): void {
-    this.ttsService.pararLeitura();
-    setTimeout(() => {
-      this.ttsService.lerTexto(texto);
-    }, 200);
+    this.ttsService.lerTexto(texto);
   }
 
   public lerUndescore(texto: string): void {

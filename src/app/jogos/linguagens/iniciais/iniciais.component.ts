@@ -29,7 +29,7 @@ export class IniciaisComponent implements OnInit {
   ngOnInit() {
     this.literals = this.interService.getIdioma();
     this.getPalavras();
-    this.lerTexto(this.literals.jogoIniciaisDescricao + '. ' + this.literals.jogoIniciaisDica);
+    this.ttsService.lerTexto(this.literals.jogoIniciaisDescricao + '. ' + this.literals.jogoIniciaisDica, true);
   }
 
   public getPalavras(): void {
@@ -110,10 +110,7 @@ export class IniciaisComponent implements OnInit {
   }
 
   public lerTexto(texto: string): void {
-    this.ttsService.pararLeitura();
-    setTimeout(() => {
-      this.ttsService.lerTexto(texto);
-    }, 200);
+    this.ttsService.lerTexto(texto);
   }
 
   public parar(): void {

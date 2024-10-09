@@ -4,12 +4,8 @@ import { EmbaralharListaService } from '../../linguagens/shared/service/embaralh
 import { JogoService } from '../../linguagens/shared/service/jogo.service';
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ReacoesService } from '../../../componentes/shared/services/reacoes.service';
-import { Drop } from '../../linguagens/shared/model/drop.model';
-import { PuzzleDuasRespostas } from '../../linguagens/shared/model/puzzle-duas-respostas.model';
-import { DropDuasRespostas } from '../../linguagens/shared/model/drop-duas-respostas.model';
 import { TextToSpeechService } from '../../../componentes/shared/services/text-to-speech.service';
 import { PuzzleNomeDuasRespostas } from '../../linguagens/shared/model/puzzle-nome-duas-respostas';
-import { DropNome } from '../../linguagens/shared/model/drop-nome';
 import { DropNomeDuasRespostas } from '../../linguagens/shared/model/drop-nome-duas-respostas';
 
 @Component({
@@ -36,7 +32,7 @@ export class FormasComponent {
   ngOnInit() {
     this.literals = this.interService.getIdioma();
     this.carregarDrops();
-    this.lerTexto(this.literals.jogoQtdeFormasDescricao + '. ' + this.literals.jogoQtdeFormasDica);
+    this.ttsService.lerTexto(this.literals.jogoQtdeFormasDescricao + '. ' + this.literals.jogoQtdeFormasDica, true);
   }
 
   public carregarDrops() {
@@ -99,10 +95,7 @@ export class FormasComponent {
   }
 
   public lerTexto(texto: string): void {
-    this.ttsService.pararLeitura();
-    setTimeout(() => {
-      this.ttsService.lerTexto(texto);
-    }, 200);
+    this.ttsService.lerTexto(texto);
   }
 
   public parar(): void {

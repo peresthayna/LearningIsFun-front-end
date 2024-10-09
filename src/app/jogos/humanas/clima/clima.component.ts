@@ -45,7 +45,7 @@ export class ClimaComponent {
 
   ngOnInit() {
     this.literals = this.interService.getIdioma();
-    this.lerTexto(this.literals.jogoClimaDescricao + '. ' + this.literals.jogoClimaDica);
+    this.ttsService.lerTexto(this.literals.jogoClimaDescricao + '. ' + this.literals.jogoClimaDica, true);
     this.carregarColunas();
     this.embaralhaListaService.embaralhaLista(this.puzzleItems);
   }
@@ -103,10 +103,7 @@ export class ClimaComponent {
   }
 
   public lerTexto(texto: string): void {
-    this.ttsService.pararLeitura();
-    setTimeout(() => {
-      this.ttsService.lerTexto(texto);
-    }, 200);
+    this.ttsService.lerTexto(texto);
   }
 
   public parar(): void {

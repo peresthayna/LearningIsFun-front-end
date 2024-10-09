@@ -34,7 +34,7 @@ export class AnimaisComponent {
   ngOnInit() {
     this.literals = this.interService.getIdioma();
     this.carregarDrops();
-    this.lerTexto(this.literals.jogoFilhotesDescricao + '. ' + this.literals.jogoFilhotesDica);
+    this.ttsService.lerTexto(this.literals.jogoFilhotesDescricao + '. ' + this.literals.jogoFilhotesDica, true);
   }
 
   public carregarDrops() {
@@ -93,10 +93,7 @@ export class AnimaisComponent {
   }
 
   public lerTexto(texto: string): void {
-    this.ttsService.pararLeitura();
-    setTimeout(() => {
-      this.ttsService.lerTexto(texto);
-    }, 200);
+    this.ttsService.lerTexto(texto);
   }
 
   public parar(): void {

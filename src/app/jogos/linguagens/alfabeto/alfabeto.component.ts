@@ -36,7 +36,7 @@ export class AlfabetoComponent implements OnInit {
     this.literals = this.interService.getIdioma();
     this.macas = this.getMacas(this.lista);
     this.alfabeto = this.getLetras(this.lista);
-    this.lerTexto(this.literals.jogoAlfabetoDescricao + '. ' + this.literals.jogoAlfabetoDica);
+    this.ttsService.lerTexto(this.literals.jogoAlfabetoDescricao + '. ' + this.literals.jogoAlfabetoDica, true);
   }
 
   public getLetras(lista: string[]): DropItem[] {
@@ -98,10 +98,7 @@ export class AlfabetoComponent implements OnInit {
   }
 
   public lerTexto(texto: string): void {
-    this.ttsService.pararLeitura();
-    setTimeout(() => {
-      this.ttsService.lerTexto(texto);
-    }, 200);
+    this.ttsService.lerTexto(texto);
   }
 
   public parar(): void {

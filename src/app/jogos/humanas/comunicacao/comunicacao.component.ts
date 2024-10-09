@@ -28,7 +28,7 @@ export class ComunicacaoComponent {
   ngOnInit() {
     this.literals = this.interService.getIdioma();
     this.getPalavras();
-    this.lerTexto(this.literals.jogoMeiosComunicacaoDescricao + '. ' + this.literals.jogoMeiosComunicacaoDica);
+    this.ttsService.lerTexto(this.literals.jogoMeiosComunicacaoDescricao + '. ' + this.literals.jogoMeiosComunicacaoDica, true);
   }
 
   public getPalavras(): void {
@@ -109,10 +109,7 @@ export class ComunicacaoComponent {
   }
 
   public lerTexto(texto: string): void {
-    this.ttsService.pararLeitura();
-    setTimeout(() => {
-      this.ttsService.lerTexto(texto);
-    }, 200);
+    this.ttsService.lerTexto(texto);
   }
 
   public lerUndescore(texto: string): void {

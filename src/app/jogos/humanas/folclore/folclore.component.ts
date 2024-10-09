@@ -28,7 +28,7 @@ export class FolcloreComponent {
   ngOnInit() {
     this.literals = this.interService.getIdioma();
     this.getPalavras();
-    this.lerTexto(this.literals.jogoFolcloreDescricao + '. ' + this.literals.jogoFolcloreDica);
+    this.ttsService.lerTexto(this.literals.jogoFolcloreDescricao + '. ' + this.literals.jogoFolcloreDica, true);
   }
 
   public getPalavras(): void {
@@ -109,10 +109,7 @@ export class FolcloreComponent {
   }
 
   public lerTexto(texto: string): void {
-    this.ttsService.pararLeitura();
-    setTimeout(() => {
-      this.ttsService.lerTexto(texto);
-    }, 200);
+    this.ttsService.lerTexto(texto);
   }
 
   public parar(): void {

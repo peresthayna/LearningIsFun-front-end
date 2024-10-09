@@ -35,7 +35,7 @@ export class CoresFrutasComponent implements OnInit {
   ngOnInit() {
     this.literals = this.interService.getIdioma();
     this.carregarDrops();
-    this.lerTexto(this.literals.jogoCoresFrutasDescricao + '. ' + this.literals.jogoCoresFrutasDica);
+    this.ttsService.lerTexto(this.literals.jogoCoresFrutasDescricao + '. ' + this.literals.jogoCoresFrutasDica, true);
   }
 
   public carregarDrops() {
@@ -94,10 +94,7 @@ export class CoresFrutasComponent implements OnInit {
   }
 
   public lerTexto(texto: string): void {
-    this.ttsService.pararLeitura();
-    setTimeout(() => {
-      this.ttsService.lerTexto(texto);
-    }, 200);
+    this.ttsService.lerTexto(texto);
   }
 
   public parar(): void {

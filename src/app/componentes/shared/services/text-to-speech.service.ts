@@ -11,6 +11,7 @@ export class TextToSpeechService {
   private language: string = '';
   private audio: HTMLAudioElement | null = null;
   private textSubject = new Subject<string>();
+  private isAudioNaoInterrompivel: boolean;
 
   constructor(
     private http: HttpClient,
@@ -27,6 +28,11 @@ export class TextToSpeechService {
         const audioUrl = URL.createObjectURL(audioBlob);
         this.audio = new Audio(audioUrl);
         this.audio.addEventListener('canplaythrough', () => this.audio?.play());
+        this.audio.addEventListener('ended', () => {
+          if(this.isAudioNaoInterrompivel) {
+            this.isAudioNaoInterrompivel = false;
+          }
+        })
       }
     });
   }
@@ -56,14 +62,18 @@ export class TextToSpeechService {
     return this.http.post<{ audioContent: string }>(this.URL, body, { responseType: 'json' });
   }
 
-  public lerTexto(texto: string) {
+  public lerTexto(texto: string, isAudioNaoInterrompivel: boolean = false) {
     if(localStorage.getItem('sound') == 'true' && texto != '') {
-      this.textSubject.next(texto);
+      if(!this.isAudioNaoInterrompivel) {
+        this.pararLeitura();
+        this.isAudioNaoInterrompivel = isAudioNaoInterrompivel;
+        this.textSubject.next(texto);
+      }
     }
   }
 
   public pararLeitura() {
-    if (this.audio) {
+    if (this.audio && !this.isAudioNaoInterrompivel) {
       this.audio.pause();
     }
   }

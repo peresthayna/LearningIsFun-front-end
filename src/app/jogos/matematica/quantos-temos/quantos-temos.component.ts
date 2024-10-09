@@ -27,7 +27,7 @@ export class QuantosTemosComponent {
   ngOnInit() {
     this.literals = this.interService.getIdioma();
     this.generateItems();
-    this.lerTexto(this.literals.jogoQuantidadesDescricao + '. ' + this.literals.jogoQuantidadesDica);
+    this.ttsService.lerTexto(this.literals.jogoQuantidadesDescricao + '. ' + this.literals.jogoQuantidadesDica, true);
   }
 
   public generateItems(): void {
@@ -75,10 +75,7 @@ export class QuantosTemosComponent {
   }
 
   public lerTexto(texto: string): void {
-    this.ttsService.pararLeitura();
-    setTimeout(() => {
-      this.ttsService.lerTexto(texto);
-    }, 200);
+    this.ttsService.lerTexto(texto);
   }
 
   public parar(): void {

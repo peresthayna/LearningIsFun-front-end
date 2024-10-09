@@ -34,7 +34,7 @@ export class EncaixarFormasComponent {
   ngOnInit() {
     this.literals = this.interService.getIdioma();
     this.carregarDrops();
-    this.lerTexto(this.literals.jogoEncaixarFormasDescricao + '. ' + this.literals.jogoEncaixarFormasDica);
+    this.ttsService.lerTexto(this.literals.jogoEncaixarFormasDescricao + '. ' + this.literals.jogoEncaixarFormasDica, true);
   }
 
   public carregarDrops() {
@@ -93,10 +93,7 @@ export class EncaixarFormasComponent {
   }
 
   public lerTexto(texto: string): void {
-    this.ttsService.pararLeitura();
-    setTimeout(() => {
-      this.ttsService.lerTexto(texto);
-    }, 200);
+    this.ttsService.lerTexto(texto);
   }
 
   public parar(): void {
