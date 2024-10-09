@@ -11,7 +11,7 @@
   <div class="row" *ngIf="palavras">
     <div class="col-3 p-2" *ngFor="let palavra of palavras">
       <div class="card text-center">
-        <img [src]="palavra.imagem"  class="card-img-top"(mouseenter)="lerUndescore(palavra.palavra)" (mouseleave)="parar()">
+        <img [src]="palavra.imagem"  class="card-img-top"(mouseenter)="lerUndescore(palavra.palavra, palavra.respostaCerta)" (mouseleave)="parar()">
         <div class="card-body">
           <div class="palavra text-center">
             <h5>{{ palavra.palavra }}</h5>

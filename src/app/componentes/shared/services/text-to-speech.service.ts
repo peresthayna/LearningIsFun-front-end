@@ -3,6 +3,16 @@ import { Injectable } from '@angular/core';
 import { debounceTime, Observable, Subject, switchMap } from 'rxjs';
 import { InternacionalizacaoService } from '../../../main/internacionalizacao/internacionalizacao.service';
 
+export class TextLanguage {
+  text: string;
+  language?: string;
+
+  constructor(text: string, language?: string) {
+    this.text = text;
+    this.language = language;
+  }
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +20,7 @@ export class TextToSpeechService {
   private URL: string = 'http://127.0.0.1:8080/texttospeech';
   private language: string = '';
   private audio: HTMLAudioElement | null = null;
-  private textSubject = new Subject<string>();
+  private textSubject = new Subject<TextLanguage>();
   private isAudioNaoInterrompivel: boolean;
 
   constructor(
@@ -20,7 +30,7 @@ export class TextToSpeechService {
     this.language  = this.interService.getIdiomaSelecionado();
     this.textSubject.pipe(
       debounceTime(500),
-      switchMap(text => this.synthesizeSpeech(text))
+      switchMap(textLanguage => this.synthesizeSpeech(textLanguage.text, textLanguage.language))
     ).subscribe(response => {
       const audioContent = response.audioContent;
       if(audioContent) {
@@ -54,20 +64,20 @@ export class TextToSpeechService {
     return new Blob(byteArrays, { type: mimeType });
   }
 
-  private synthesizeSpeech(text: string): Observable<{ audioContent: string }> {
+  private synthesizeSpeech(text: string, language?: string): Observable<{ audioContent: string }> {
     const body = {
       text: text,
-      language: this.language
+      language: language ? language : this.language
     }
     return this.http.post<{ audioContent: string }>(this.URL, body, { responseType: 'json' });
   }
 
-  public lerTexto(texto: string, isAudioNaoInterrompivel: boolean = false) {
+  public lerTexto(texto: string, isAudioNaoInterrompivel: boolean = false, language?: string) {
     if(localStorage.getItem('sound') == 'true' && texto != '') {
       if(!this.isAudioNaoInterrompivel) {
         this.pararLeitura();
         this.isAudioNaoInterrompivel = isAudioNaoInterrompivel;
-        this.textSubject.next(texto);
+        this.textSubject.next(new TextLanguage(texto, language));
       }
     }
   }

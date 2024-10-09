@@ -108,6 +108,10 @@ export class FolcloreComponent {
     }
   }
 
+  public lerTextoEmPortugues(texto: string): void {
+    this.ttsService.lerTexto(texto, false, 'pt-br');
+  }
+
   public lerTexto(texto: string): void {
     this.ttsService.lerTexto(texto);
   }
@@ -116,8 +120,8 @@ export class FolcloreComponent {
     this.ttsService.pararLeitura();
   }
 
-  public lerUndescore(texto: string): void {
-    texto = texto.replace(/_/g, "");
-    this.lerTexto(texto);
+  public lerUndescore(texto: string, respostaCerta: string): void {
+    texto = texto.replace(/_/g, respostaCerta);
+    this.lerTextoEmPortugues(texto);
   }
 }

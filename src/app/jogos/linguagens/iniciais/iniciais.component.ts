@@ -117,8 +117,8 @@ export class IniciaisComponent implements OnInit {
     this.ttsService.pararLeitura();
   }
 
-  public lerUndescore(texto: string): void {
-    texto = texto.replace(/_/g, "");
+  public lerUndescore(texto: string, respostaCerta: string): void {
+    texto = texto.replace(/_/g, respostaCerta);
     this.lerTexto(texto);
   }
 

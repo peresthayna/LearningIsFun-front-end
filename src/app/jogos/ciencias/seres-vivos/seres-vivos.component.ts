@@ -112,8 +112,8 @@ export class SeresVivosComponent {
     this.ttsService.lerTexto(texto);
   }
 
-  public lerUndescore(texto: string): void {
-    texto = texto.replace(/_/g, "");
+  public lerUndescore(texto: string, respostaCerta: string): void {
+    texto = texto.replace(/_/g, respostaCerta);
     this.lerTexto(texto);
   }
 
