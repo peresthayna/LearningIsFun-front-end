@@ -164,7 +164,7 @@ export const es_es = {
   negativa3: '¡Ay, no! No es la respuesta correcta',
   negativa4: '¡Sigue intentándolo!',
   negativa5: '¡No te desanimes, ya casi es!',
-  observando1: 'Humm',
+  observando1: 'Aquí vamos',
   observando2: 'Continuar...',
   observando3: 'solo estoy mirando',
   concluiu1: '¡Guau! ¡Lo hiciste!',

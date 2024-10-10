@@ -164,7 +164,7 @@ export const en_us = {
   negativa3: "Oh no! That's not the right answer",
   negativa4: 'Keep trying!',
   negativa5: "Don't get discouraged, you're almost there!",
-  observando1: 'Humm',
+  observando1: 'Here we go',
   observando2: 'Keep going...',
   observando3: "I'm just watching!",
   concluiu1: 'Wow! You made it!',
